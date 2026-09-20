@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #ffffff; -webkit-font-smoothing: antialiased; }
+  a { color: #35404C; text-decoration: none; }
+  a:hover { color: #019067; }
+  [data-scroller] { scrollbar-width: none; }
+  [data-scroller]::-webkit-scrollbar { display: none; }
+  @keyframes y22fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="font-family:Urbanist,Helvetica,sans-serif;color:#2C2B2A;background:#fff;overflow-x:hidden">
+
+  <!-- ============ UTILITY BAR ============ -->
+  <div style="background:#2C2B2A;color:#EFF2F6">
+    <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.02em;padding:9px 0">
+        <span style="display:inline-block;width:6px;height:6px;background:#F5BE2A"></span>
+        <span style="font-weight:500">{{ market.promo }}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase">
+        <div style="display:flex;align-items:center;gap:2px;padding-right:14px;margin-right:14px;border-right:1px solid rgba(239,242,246,.22)">
+          <sc-for list="{{ marketOptions }}" as="m" hint-placeholder-count="2">
+            <button type="button" onClick="{{ m.select }}" style="appearance:none;border:0;cursor:pointer;font-family:inherit;font-size:11.5px;letter-spacing:.08em;padding:6px 10px;background:{{ m.bg }};color:{{ m.fg }};font-weight:600">{{ m.label }}</button>
+          </sc-for>
+        </div>
+        <span style="opacity:.75;padding-right:14px;margin-right:14px;border-right:1px solid rgba(239,242,246,.22)">{{ market.currencyLabel }}</span>
+        <a href="#" style="color:#EFF2F6;opacity:.75;padding-right:14px;margin-right:14px;border-right:1px solid rgba(239,242,246,.22)">Track Order</a>
+        <a href="#" style="color:#EFF2F6;opacity:.75">Help &amp; Support</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HEADER + NAV ============ -->
+  <div style="position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid #E6EAEF">
+    <div onMouseLeave="{{ closeMenu }}" style="position:relative">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);height:76px;display:flex;align-items:center;gap:clamp(16px,3vw,40px)">
+
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ openDrawer }}" style="appearance:none;background:none;border:0;cursor:pointer;padding:8px 8px 8px 0;display:flex;flex-direction:column;gap:4px">
+            <span style="display:block;width:22px;height:2px;background:#2C2B2A"></span>
+            <span style="display:block;width:22px;height:2px;background:#2C2B2A"></span>
+            <span style="display:block;width:14px;height:2px;background:#2C2B2A"></span>
+          </button>
+        </sc-if>
+
+        <a href="#" style="display:flex;align-items:center;flex:0 0 auto">
+          <img src="assets/22yards-logo.png" alt="22 Yards — precision. performance." style="display:block;height:42px;width:auto">
+        </a>
+
+        <div style="flex:1 1 auto;display:flex;align-items:center;min-width:0">
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+            <label style="display:flex;align-items:center;gap:10px;width:100%;max-width:460px;background:#EFF2F6;padding:11px 16px">
+              <span style="display:inline-block;width:13px;height:13px;border:1.5px solid #7A838D;border-radius:50%"></span>
+              <input type="text" placeholder="Search sports, brands, gear…" style="appearance:none;border:0;background:none;outline:none;font-family:inherit;font-size:14px;color:#2C2B2A;width:100%">
+            </label>
+          </sc-if>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:clamp(12px,2vw,26px);flex:0 0 auto;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#35404C">
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+            <a href="#" style="color:#35404C">Account</a>
+          </sc-if>
+          <a href="#" style="color:#35404C;display:flex;align-items:center;gap:6px">Wishlist<span style="background:#EFF2F6;padding:2px 6px;font-size:11px">{{ wishCount }}</span></a>
+          <a href="#" style="color:#fff;background:#35404C;padding:10px 16px;display:flex;align-items:center;gap:8px">Cart<span style="background:#F5BE2A;color:#2C2B2A;padding:1px 6px">00</span></a>
+        </div>
+      </div>
+
+      <!-- primary navigation -->
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="border-top:1px solid #EFF2F6">
+          <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);display:flex;align-items:stretch;flex-wrap:wrap;gap:clamp(14px,2.2vw,34px)">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+              <button type="button" onMouseEnter="{{ n.enter }}" onClick="{{ n.enter }}" style="appearance:none;background:none;border:0;border-bottom:2px solid {{ n.line }};cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ n.fg }};padding:16px 0 14px">{{ n.label }}</button>
+            </sc-for>
+            <div style="margin-left:auto;display:flex;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#019067;font-weight:700;gap:8px">
+              <span style="display:inline-block;width:7px;height:7px;background:#019067;border-radius:50%"></span>100% Authentic
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- mega menu -->
+      <sc-if value="{{ menuRailOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid #E6EAEF;box-shadow:0 28px 48px -26px rgba(44,43,42,.3);animation:y22fade .16s ease-out">
+          <div style="max-width:1440px;margin:0 auto;padding:clamp(26px,3vw,44px) clamp(16px,4vw,56px) 0;display:grid;grid-template-columns:minmax(200px,268px) minmax(0,1fr) minmax(260px,320px);gap:clamp(24px,3.5vw,56px);align-items:start">
+
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <a href="#" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px 13px 14px;margin-bottom:8px;border-left:3px solid #2C2B2A;background:#F1F4F7;font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#2C2B2A" style-hover="background:#2C2B2A;color:#fff">{{ rail.allLabel }}<span>→</span></a>
+              <sc-for list="{{ rail.groups }}" as="g" hint-placeholder-count="3">
+                <button type="button" onMouseEnter="{{ g.activate }}" onClick="{{ g.activate }}" style="appearance:none;border:0;cursor:pointer;font-family:inherit;text-align:left;display:flex;align-items:baseline;gap:12px;padding:13px 16px 13px 14px;background:{{ g.bg }};border-left:3px solid {{ g.bar }}">
+                  <span style="display:flex;flex-direction:column;gap:3px">
+                    <span style="font-size:clamp(17px,1.6vw,22px);font-weight:600;letter-spacing:-.02em;line-height:1.1;color:{{ g.fg }}">{{ g.title }}</span>
+                    <sc-if value="{{ g.hasNote }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:12.5px;color:#6B7683">{{ g.note }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.1em;color:{{ g.count }}">{{ g.n }}</span>
+                </button>
+              </sc-for>
+            </div>
+
+            <div style="padding-bottom:clamp(26px,3vw,40px)">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8A939D;margin-bottom:18px">{{ rail.activeTitle }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:4px 22px">
+                <sc-for list="{{ rail.items }}" as="i" hint-placeholder-count="6">
+                  <div>
+                    <a href="#" style="display:flex;flex-direction:column;gap:3px;padding:8px 0;color:#2C2B2A" style-hover="color:#019067">
+                      <span style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;letter-spacing:-.01em">
+                        {{ i.label }}
+                        <sc-if value="{{ i.hasFlag }}" hint-placeholder-val="{{ false }}">
+                          <span style="background:#F5BE2A;color:#2C2B2A;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px">{{ i.flag }}</span>
+                        </sc-if>
+                      </span>
+                      <sc-if value="{{ i.hasNote }}" hint-placeholder-val="{{ false }}">
+                        <span style="font-size:12.5px;font-weight:400;color:#6B7683">{{ i.note }}</span>
+                      </sc-if>
+                    </a>
+                    <sc-if value="{{ i.hasSubs }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;flex-direction:column;gap:6px;padding:2px 0 10px 14px;border-left:1px solid #E6EAEF">
+                        <sc-for list="{{ i.subs }}" as="s" hint-placeholder-count="3">
+                          <a href="#" style="font-size:13.5px;color:#5B6570" style-hover="color:#2C2B2A">{{ s }}</a>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding-bottom:clamp(26px,3vw,40px)">
+              <div style="background-color:#46525F;background-image:{{ menu.featureImg }};background-size:cover;background-position:50% 35%;aspect-ratio:4/3"></div>
+              <div style="background:#2C2B2A;color:#fff;padding:20px">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#70BC9C;margin-bottom:8px">{{ menu.featureKicker }}</div>
+                <div style="font-size:18px;font-weight:600;line-height:1.25;margin-bottom:14px">{{ menu.featureTitle }}</div>
+                <a href="#" style="color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #F5BE2A;padding-bottom:4px">{{ menu.featureCta }}</a>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid #EFF2F6;background:#FAFBFC">
+            <div style="max-width:1440px;margin:0 auto;padding:14px clamp(16px,4vw,56px);display:flex;align-items:center;gap:clamp(16px,2.5vw,34px);flex-wrap:wrap">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#A5AEB7">Popular</span>
+              <sc-for list="{{ rail.quick }}" as="q" hint-placeholder-count="4">
+                <a href="#" style="font-size:13.5px;font-weight:600;color:#35404C" style-hover="color:#019067">{{ q }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ menuClassicOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid #E6EAEF;box-shadow:0 24px 40px -24px rgba(44,43,42,.28);animation:y22fade .16s ease-out">
+          <div style="max-width:1440px;margin:0 auto;padding:clamp(24px,3vw,40px) clamp(16px,4vw,56px);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(24px,4vw,56px);align-items:start">
+            <div>
+              <sc-if value="{{ menu.hasTiles }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+                  <sc-for list="{{ menu.tiles }}" as="t" hint-placeholder-count="8">
+                    <a href="#" style="display:flex;align-items:center;gap:12px;padding:10px;background:#F6F8ED" style-hover="background:#EFF2F6">
+                      <span style="flex:0 0 auto;width:42px;height:42px;background:repeating-linear-gradient(135deg,#E3E8EF 0 6px,#D5DCE5 6px 12px)"></span>
+                      <span style="font-size:13.5px;font-weight:600;letter-spacing:.01em;color:#2C2B2A">{{ t }}</span>
+                    </a>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ menu.hasColumns }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(20px,3vw,44px)">
+                  <sc-for list="{{ menu.columns }}" as="c" hint-placeholder-count="3">
+                    <div>
+                      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A939D;padding-bottom:14px;border-bottom:1px solid #EFF2F6;margin-bottom:14px">{{ c.title }}</div>
+                      <div style="display:flex;flex-direction:column;gap:10px">
+                        <sc-for list="{{ c.items }}" as="i" hint-placeholder-count="5">
+                          <div style="display:flex;flex-direction:column;gap:8px">
+                            <a href="#" style="font-size:14px;color:#35404C">{{ i.label }}</a>
+                            <sc-if value="{{ i.hasSubs }}" hint-placeholder-val="{{ false }}">
+                              <div style="display:flex;flex-direction:column;gap:7px;padding-left:12px;border-left:1px solid #E6EAEF">
+                                <sc-for list="{{ i.subs }}" as="s" hint-placeholder-count="3">
+                                  <a href="#" style="font-size:13px;color:#7A838D">{{ s }}</a>
+                                </sc-for>
+                              </div>
+                            </sc-if>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <div style="background:#35404C;color:#fff;padding:22px">
+              <div style="height:150px;background-color:#46525F;background-image:{{ menu.featureImg }};background-size:cover;background-position:50% 35%;margin-bottom:16px"></div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#70BC9C;margin-bottom:8px">{{ menu.featureKicker }}</div>
+              <div style="font-size:20px;font-weight:600;line-height:1.2;margin-bottom:14px">{{ menu.featureTitle }}</div>
+              <a href="#" style="color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #F5BE2A;padding-bottom:4px">{{ menu.featureCta }}</a>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- ============ MOBILE DRAWER ============ -->
+  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:90;background:rgba(44,43,42,.5);display:flex">
+      <div style="width:min(88%,380px);background:#fff;height:100%;overflow-y:auto;animation:y22fade .18s ease-out">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #EFF2F6">
+          <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto">
+          <button type="button" onClick="{{ closeDrawer }}" style="appearance:none;background:#EFF2F6;border:0;cursor:pointer;font-family:inherit;font-size:16px;width:34px;height:34px">×</button>
+        </div>
+        <div style="padding:12px 20px 20px">
+          <label style="display:flex;align-items:center;gap:10px;background:#EFF2F6;padding:12px 14px;margin-bottom:18px">
+            <span style="display:inline-block;width:13px;height:13px;border:1.5px solid #7A838D;border-radius:50%"></span>
+            <input type="text" placeholder="Search sports, brands, gear…" style="appearance:none;border:0;background:none;outline:none;font-family:inherit;font-size:14px;width:100%">
+          </label>
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+            <div style="border-bottom:1px solid #EFF2F6">
+              <button type="button" onClick="{{ n.accordion }}" style="appearance:none;background:none;border:0;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 0;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2C2B2A">
+                {{ n.label }}<span style="color:#019067;font-size:16px">{{ n.sign }}</span>
+              </button>
+              <sc-if value="{{ n.accOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 0 18px">
+                  <sc-for list="{{ n.flat }}" as="i" hint-placeholder-count="6">
+                    <a href="#" style="font-size:13.5px;color:#35404C">{{ i }}</a>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+          <div style="display:flex;gap:10px;margin-top:22px">
+            <sc-for list="{{ marketOptions }}" as="m" hint-placeholder-count="2">
+              <button type="button" onClick="{{ m.select }}" style="flex:1;appearance:none;border:1px solid #35404C;cursor:pointer;font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px;font-weight:600;background:{{ m.dBg }};color:{{ m.dFg }}">{{ m.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ HERO ============ -->
+  <section data-screen-label="Hero" style="background:#EFF2F6">
+    <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(20px,3vw,44px);align-items:center">
+      <div style="padding:clamp(36px,5vw,80px) 0">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#019067;margin-bottom:clamp(18px,2.5vw,28px)">
+          <span style="display:inline-block;width:6px;height:6px;background:#019067"></span>16 Sports · One Destination
+        </div>
+        <h1 style="margin:0;font-size:clamp(44px,6.2vw,88px);line-height:.94;font-weight:800;letter-spacing:-.035em;color:#2C2B2A;text-wrap:balance">MADE FOR<br><span style="color:#019067">EVERY MOVE</span></h1>
+        <p style="margin:clamp(18px,2.5vw,26px) 0 0;max-width:44ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;color:#4A5560;text-wrap:pretty">Premium sports gear for every player, every sport, everywhere — backed by expert guidance and 100% authentic stock.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(24px,3vw,34px)">
+          <a href="#" style="background:#2C2B2A;color:#fff;padding:17px 34px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#019067;color:#fff">Shop Sports →</a>
+          <a href="#finder" style="border:1.5px solid #2C2B2A;color:#2C2B2A;padding:16px 32px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#2C2B2A;color:#fff">Explore Your Sport</a>
+        </div>
+        <div style="display:flex;gap:clamp(20px,3vw,40px);margin-top:clamp(28px,3.5vw,46px);flex-wrap:wrap">
+          <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
+            <div>
+              <div style="font-size:26px;font-weight:700;letter-spacing:-.02em;color:#35404C">{{ s.k }}</div>
+              <div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#7A838D;font-weight:600">{{ s.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div role="img" aria-label="Cricket, running, football, tennis and basketball players in action" style="min-height:clamp(360px,44vw,600px);background-image:url(assets/hero-banner.png);background-size:auto 122%;background-position:66% top;background-repeat:no-repeat;background-color:#DDE3EA"></div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST STRIP ============ -->
+  <section data-screen-label="Trust" style="background:#2C2B2A;color:#fff">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(22px,2.5vw,30px) clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(16px,2.5vw,34px);align-items:center">
+      <div style="display:flex;align-items:center;gap:14px;padding-right:clamp(16px,2vw,28px);border-right:1px solid rgba(255,255,255,.16)">
+        <span style="flex:0 0 auto;width:40px;height:40px;background:#019067;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800">✓</span>
+        <div>
+          <div style="font-size:clamp(17px,1.5vw,21px);font-weight:800;letter-spacing:-.01em;line-height:1.1">100% AUTHENTIC</div>
+          <div style="font-size:12.5px;color:#C8CFCA">Sourced from trusted manufacturers</div>
+        </div>
+      </div>
+      <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <div style="font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#EFF2F6">{{ t.title }}</div>
+          <div style="font-size:12.5px;color:#9AA3AC">{{ t.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ TOP BRANDS ============ -->
+  <sc-if value="{{ sec.brands }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Top Brands" style="padding:clamp(46px,5vw,72px) 0;border-bottom:1px solid #EFF2F6">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,34px)">
+          <div>
+            <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.05">Top Brands. <span style="color:#019067">Game Ready.</span></h2>
+            <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">Official stockist — logos shown in their original brand colours.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px">
+            <a href="#" style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #2C2B2A;padding-bottom:3px">Shop All Brands</a>
+            <div style="display:flex;gap:8px">
+              <button type="button" onClick="{{ brandsPrev }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">←</button>
+              <button type="button" onClick="{{ brandsNext }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">→</button>
+            </div>
+          </div>
+        </div>
+        <div id="y22-brands" data-scroller="1" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth">
+          <sc-for list="{{ brands }}" as="b" hint-placeholder-count="8">
+            <a href="#" style="flex:0 0 auto;width:clamp(160px,17vw,210px);scroll-snap-align:start;border:1px solid #E6EAEF;padding:20px;display:flex;flex-direction:column;gap:14px" style-hover="border-color:#35404C">
+              <span style="height:58px;display:flex;align-items:center;justify-content:center">
+                <sc-if value="{{ b.hasLogo }}" hint-placeholder-val="{{ true }}">
+                  <img src="{{ b.logo }}" alt="{{ b.name }}" loading="lazy" onError="{{ b.onLogoError }}" style="max-height:46px;max-width:100%;width:auto;object-fit:contain">
+                </sc-if>
+                <sc-if value="{{ b.noLogo }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#F6F8ED;font-size:19px;font-weight:800;letter-spacing:-.01em;color:#35404C;text-align:center;padding:0 8px;line-height:1.05">{{ b.name }}</span>
+                </sc-if>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px">
+                <span style="width:8px;height:8px;background:{{ b.dot }}"></span>
+                <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A838D">{{ b.sport }}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ LEGEND LINEUP ============ -->
+  <sc-if value="{{ sec.legendLineup }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Legend Lineup" style="padding:clamp(52px,6vw,88px) 0;background:#F6F8ED">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,34px)">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#019067;margin-bottom:10px">Cricketers · Endorsed Product Lines</div>
+            <h2 style="margin:0;font-size:clamp(28px,3.4vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1">LEGEND LINEUP</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px">
+            <a href="#" style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #2C2B2A;padding-bottom:3px">View All</a>
+            <div style="display:flex;gap:8px">
+              <button type="button" onClick="{{ legendPrev }}" style="appearance:none;width:38px;height:38px;border:1px solid #C8CFCA;background:none;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#fff">←</button>
+              <button type="button" onClick="{{ legendNext }}" style="appearance:none;width:38px;height:38px;border:1px solid #C8CFCA;background:none;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#fff">→</button>
+            </div>
+          </div>
+        </div>
+        <div id="y22-legend" data-scroller="1" style="display:flex;gap:clamp(12px,1.5vw,20px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth">
+          <sc-for list="{{ legends }}" as="l" hint-placeholder-count="4">
+            <article style="flex:0 0 auto;width:clamp(250px,26vw,330px);scroll-snap-align:start;background:#fff">
+              <div style="position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#DDE3EA 0 10px,#D2D9E2 10px 20px);display:flex;align-items:flex-end;padding:14px">
+                <span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#5B6570">player portrait</span>
+                <span style="position:absolute;top:0;left:0;background:#2C2B2A;color:#F5BE2A;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px">{{ l.tag }}</span>
+              </div>
+              <div style="padding:18px 18px 22px">
+                <div style="font-size:17px;font-weight:700;letter-spacing:-.01em">{{ l.name }}</div>
+                <div style="font-size:13px;font-weight:600;color:#019067;letter-spacing:.04em;text-transform:uppercase;margin-top:4px">{{ l.series }}</div>
+                <p style="margin:10px 0 16px;font-size:13.5px;line-height:1.5;color:#6B7683">{{ l.note }}</p>
+                <a href="#" style="display:inline-block;background:#35404C;color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px" style-hover="background:#019067">Discover</a>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ SPORT SELECTOR STRIP ============ -->
+  <sc-if value="{{ sec.sportStrip }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Shop by Sport" style="padding:clamp(52px,6vw,88px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(20px,2.5vw,30px)">
+          <div>
+            <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em">Find your sport</h2>
+            <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">Every sport gets its own home — not an afterthought.</p>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button type="button" onClick="{{ sportsPrev }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">←</button>
+            <button type="button" onClick="{{ sportsNext }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">→</button>
+          </div>
+        </div>
+        <div id="y22-sports" data-scroller="1" style="display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth">
+          <sc-for list="{{ sportTiles }}" as="s" hint-placeholder-count="9">
+            <button type="button" onClick="{{ s.select }}" style="flex:0 0 auto;width:clamp(120px,13vw,170px);height:clamp(300px,32vw,400px);scroll-snap-align:start;position:relative;appearance:none;border:0;cursor:pointer;padding:0;background-color:{{ s.bg }};background-image:{{ s.img }};background-size:cover;background-position:{{ s.pos }};display:flex;align-items:flex-end;justify-content:flex-start;outline:{{ s.ring }};outline-offset:-3px">
+              <span style="writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 14px;font-family:inherit;font-size:clamp(15px,1.4vw,19px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff">{{ s.name }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ SHOP BY EXPERIENCE ============ -->
+  <sc-if value="{{ sec.experience }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Shop by Experience" style="padding:0 0 clamp(52px,6vw,88px)">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="margin-bottom:clamp(20px,2.5vw,30px)">
+          <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em">Shop the way you play</h2>
+          <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">Four ways in — pick the one that sounds like you.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ quadCols }};gap:10px">
+          <sc-for list="{{ experiences }}" as="e" hint-placeholder-count="4">
+            <a href="#" style="position:relative;min-height:clamp(300px,30vw,420px);background-color:{{ e.bg }};background-image:{{ e.img }};background-size:cover;background-position:{{ e.pos }};display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#fff" style-hover="filter:brightness(1.08)">
+              <span style="font-size:clamp(20px,2vw,28px);font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1">{{ e.title }}</span>
+              <span style="font-size:14.5px;color:rgba(255,255,255,.9);margin-top:8px;max-width:24ch">{{ e.line }}</span>
+              <span style="margin-top:18px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-bottom:2px solid #F5BE2A;padding-bottom:4px;align-self:flex-start">{{ e.cta }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ FIND YOUR GAME (guided) ============ -->
+  <sc-if value="{{ sec.finder }}" hint-placeholder-val="{{ true }}">
+    <section id="finder" data-screen-label="Find Your Game" style="background:#35404C;color:#fff;padding:clamp(52px,6vw,92px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,64px);align-items:start">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#70BC9C;margin-bottom:14px">Sports Concierge</div>
+          <h2 style="margin:0;font-size:clamp(30px,3.6vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1">FIND YOUR GAME</h2>
+          <p style="margin:18px 0 0;max-width:42ch;font-size:16px;line-height:1.6;color:#C8CFCA;text-wrap:pretty">Three questions and we will shortlist the right gear — with size, weight and level guidance from people who play.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:clamp(24px,3vw,36px)">
+            <sc-for list="{{ finderProgress }}" as="p" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="width:30px;height:30px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:{{ p.bg }};color:{{ p.fg }}">{{ p.n }}</span>
+                <span style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:{{ p.label }}">{{ p.q }}</span>
+                <span style="margin-left:auto;font-size:13px;color:#70BC9C;font-weight:600">{{ p.answer }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff;color:#2C2B2A;padding:clamp(22px,3vw,38px)">
+          <sc-if value="{{ finderActive }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A939D">Step {{ finder.stepLabel }}</span>
+                <span style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#019067">{{ finder.hint }}</span>
+              </div>
+              <h3 style="margin:0 0 20px;font-size:clamp(20px,2vw,27px);font-weight:700;letter-spacing:-.02em">{{ finder.question }}</h3>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px">
+                <sc-for list="{{ finder.options }}" as="o" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ o.select }}" style="appearance:none;cursor:pointer;font-family:inherit;text-align:left;padding:15px 16px;font-size:14.5px;font-weight:600;border:1.5px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;margin-top:26px">
+                <button type="button" onClick="{{ finder.next }}" style="appearance:none;border:0;cursor:pointer;font-family:inherit;background:{{ finder.ctaBg }};color:#fff;padding:16px 28px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">{{ finder.ctaLabel }}</button>
+                <sc-if value="{{ finder.canBack }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{ finder.back }}" style="appearance:none;border:0;background:none;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B7683">Back</button>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ finderDone }}" hint-placeholder-val="{{ false }}">
+            <div style="animation:y22fade .2s ease-out">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#019067;margin-bottom:10px">Your shortlist</div>
+              <h3 style="margin:0 0 8px;font-size:clamp(20px,2vw,27px);font-weight:700;letter-spacing:-.02em">{{ finder.resultTitle }}</h3>
+              <p style="margin:0 0 20px;font-size:14.5px;color:#6B7683;line-height:1.55">{{ finder.resultLine }}</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px">
+                <sc-for list="{{ finder.resultTiles }}" as="r" hint-placeholder-count="4">
+                  <div style="border:1px solid #E6EAEF;padding:14px">
+                    <div style="height:64px;background:repeating-linear-gradient(135deg,#F2F5F8 0 8px,#E8EDF3 8px 16px);margin-bottom:10px"></div>
+                    <div style="font-size:13.5px;font-weight:600">{{ r }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+                <a href="#" style="background:#019067;color:#fff;padding:16px 28px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Show My Gear</a>
+                <button type="button" onClick="{{ finder.reset }}" style="appearance:none;border:0;background:none;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B7683">Start Again</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ MISSIONS + BEST SELLERS ============ -->
+  <sc-if value="{{ sec.missions }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Best Sellers &amp; Missions" style="padding:clamp(52px,6vw,88px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:20px">
+          <div>
+            <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em">What players are buying</h2>
+            <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">{{ mission.desc }}</p>
+          </div>
+          <a href="#" style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #2C2B2A;padding-bottom:3px">View All</a>
+        </div>
+        <div data-scroller="1" style="display:flex;gap:8px;overflow-x:auto;border-bottom:1px solid #E6EAEF;margin-bottom:clamp(22px,3vw,32px)">
+          <sc-for list="{{ missionTabs }}" as="t" hint-placeholder-count="5">
+            <button type="button" onClick="{{ t.select }}" style="flex:0 0 auto;appearance:none;border:0;border-bottom:2px solid {{ t.line }};background:none;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{{ t.fg }};padding:12px 14px">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ quadCols }};gap:clamp(10px,1.4vw,18px)">
+          <sc-for list="{{ missionProducts }}" as="p" hint-placeholder-count="4">
+            <article style="background:#fff;border:1px solid #E6EAEF;display:flex;flex-direction:column" style-hover="border-color:#35404C">
+              <div style="position:relative;aspect-ratio:1/1;background:repeating-linear-gradient(135deg,#F2F5F8 0 10px,#E8EDF3 10px 20px);display:flex;align-items:flex-end;padding:12px">
+                <span style="font:500 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A939D">product shot</span>
+                <span style="position:absolute;top:0;left:0;background:{{ p.badgeBg }};color:{{ p.badgeFg }};font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px">{{ p.badge }}</span>
+                <button type="button" onClick="{{ p.toggleWish }}" style="position:absolute;top:8px;right:8px;appearance:none;cursor:pointer;font-family:inherit;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;border:1px solid {{ p.wishBorder }};background:{{ p.wishBg }};color:{{ p.wishFg }}">{{ p.wishLabel }}</button>
+              </div>
+              <div style="padding:16px;display:flex;flex-direction:column;gap:7px;flex:1">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A939D">{{ p.brand }}</div>
+                <div style="font-size:15px;font-weight:600;line-height:1.3;letter-spacing:-.01em">{{ p.name }}</div>
+                <div style="display:flex;align-items:center;gap:7px">
+                  <span style="color:#F5BE2A;font-size:13px;letter-spacing:.08em">★★★★★</span>
+                  <span style="font-size:12px;color:#8A939D">({{ p.reviews }})</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:2px">
+                  <span style="font-size:18px;font-weight:700;letter-spacing:-.01em">{{ p.price }}</span>
+                  <span style="font-size:13px;color:#A5AEB7;text-decoration:line-through">{{ p.mrp }}</span>
+                </div>
+                <div style="font-size:12px;font-weight:600;color:{{ p.availFg }}">{{ p.avail }}</div>
+                <div style="display:flex;gap:8px;margin-top:auto;padding-top:14px">
+                  <a href="#" style="flex:1;text-align:center;background:#2C2B2A;color:#fff;padding:13px 10px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase" style-hover="background:#019067">{{ p.cta }}</a>
+                  <a href="#" style="width:44px;display:flex;align-items:center;justify-content:center;border:1px solid #D5DCE5;color:#6B7683;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase" style-hover="border-color:#35404C;color:#35404C">vs</a>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ PRODUCT EDUCATION ============ -->
+  <sc-if value="{{ sec.education }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Product Education" style="background:#EFF2F6;padding:clamp(52px,6vw,88px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(24px,3vw,48px);align-items:start">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#019067;margin-bottom:12px">Buying Guidance</div>
+            <h2 style="margin:0;font-size:clamp(26px,3vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-wrap:balance">Not sure which bat is right for you?</h2>
+            <p style="margin:16px 0 24px;max-width:40ch;font-size:15.5px;line-height:1.6;color:#4A5560;text-wrap:pretty">Willow grade, weight, size, profile — it matters more than the sticker. Our guides and guided selector match the bat to the player.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px">
+              <a href="#" style="background:#019067;color:#fff;padding:16px 28px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Find Your Bat</a>
+              <a href="#" style="border:1.5px solid #35404C;color:#35404C;padding:15px 26px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#35404C;color:#fff">All Buying Guides</a>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;align-items:start">
+            <sc-for list="{{ education }}" as="g" hint-placeholder-count="6">
+              <a href="#" style="background:#fff;padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-content:flex-start" style-hover="background:#2C2B2A;color:#fff">
+                <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#019067">{{ g.n }}</span>
+                <span style="font-size:15.5px;font-weight:700;line-height:1.25;letter-spacing:-.01em">{{ g.title }}</span>
+                <span style="font-size:12.5px;color:#7A838D">{{ g.note }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ NEW ARRIVALS ============ -->
+  <sc-if value="{{ sec.newArrivals }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="New Arrivals" style="padding:clamp(52px,6vw,88px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,32px)">
+          <div>
+            <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em">New arrivals</h2>
+            <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">Just landed across every sport.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px">
+            <a href="#" style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #2C2B2A;padding-bottom:3px">View All</a>
+            <div style="display:flex;gap:8px">
+              <button type="button" onClick="{{ newPrev }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">←</button>
+              <button type="button" onClick="{{ newNext }}" style="appearance:none;width:38px;height:38px;border:1px solid #D5DCE5;background:#fff;cursor:pointer;font-size:15px;color:#35404C" style-hover="background:#EFF2F6">→</button>
+            </div>
+          </div>
+        </div>
+        <div id="y22-new" data-scroller="1" style="display:flex;gap:clamp(10px,1.4vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth">
+          <sc-for list="{{ arrivals }}" as="p" hint-placeholder-count="4">
+            <article style="flex:0 0 auto;width:clamp(238px,23vw,300px);scroll-snap-align:start;background:#fff;border:1px solid #E6EAEF;display:flex;flex-direction:column" style-hover="border-color:#35404C">
+              <div style="position:relative;aspect-ratio:1/1;background:repeating-linear-gradient(135deg,#F2F5F8 0 10px,#E8EDF3 10px 20px);display:flex;align-items:flex-end;padding:12px">
+                <span style="font:500 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A939D">product shot</span>
+                <span style="position:absolute;top:0;left:0;background:#F15B47;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px">New</span>
+                <button type="button" onClick="{{ p.toggleWish }}" style="position:absolute;top:8px;right:8px;appearance:none;cursor:pointer;font-family:inherit;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;border:1px solid {{ p.wishBorder }};background:{{ p.wishBg }};color:{{ p.wishFg }}">{{ p.wishLabel }}</button>
+              </div>
+              <div style="padding:16px;display:flex;flex-direction:column;gap:7px;flex:1">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A939D">{{ p.brand }}</div>
+                <div style="font-size:15px;font-weight:600;line-height:1.3">{{ p.name }}</div>
+                <div style="font-size:18px;font-weight:700;margin-top:2px">{{ p.price }}</div>
+                <div style="font-size:12px;font-weight:600;color:{{ p.availFg }}">{{ p.avail }}</div>
+                <a href="#" style="margin-top:auto;text-align:center;background:#2C2B2A;color:#fff;padding:13px 10px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase" style-hover="background:#019067">{{ p.cta }}</a>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ COMMUNITY ============ -->
+  <sc-if value="{{ sec.community }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Community" style="padding:0 0 clamp(0px,0vw,0px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))">
+        <div role="img" aria-label="A team huddle" style="min-height:clamp(340px,34vw,520px);background-color:#C8CFCA;background-image:{{ communityImg }};background-size:cover;background-position:50% 40%"></div>
+        <div style="background:#F6F8ED;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vw,80px)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#019067;margin-bottom:14px">The 22 Yards Community</div>
+          <h2 style="margin:0;font-size:clamp(26px,3.2vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.05;max-width:24ch;text-wrap:balance">Sport is better when we play together.</h2>
+          <p style="margin:18px 0 26px;max-width:46ch;font-size:15.5px;line-height:1.6;color:#4A5560;text-wrap:pretty">Club players, weekend teams, parents kitting out a first season, academies building squads — we supply, advise and turn up for all of them.</p>
+          <div style="display:flex;gap:clamp(18px,3vw,40px);flex-wrap:wrap;margin-bottom:28px">
+            <sc-for list="{{ communityStats }}" as="c" hint-placeholder-count="3">
+              <div>
+                <div style="font-size:24px;font-weight:700;color:#35404C;letter-spacing:-.02em">{{ c.k }}</div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#7A838D">{{ c.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <a href="#" style="align-self:flex-start;background:#2C2B2A;color:#fff;padding:16px 30px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#019067">Join The Community</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ REVIEWS ============ -->
+  <sc-if value="{{ sec.reviews }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Reviews" style="background:#35404C;color:#fff;padding:clamp(48px,5.5vw,80px) 0;position:relative;overflow:hidden">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px);position:relative">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,34px)">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#70BC9C;margin-bottom:10px">Customer Reviews</div>
+            <h2 style="margin:0;font-size:clamp(26px,3vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1">REAL PLAYERS. REAL STORIES.</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px">
+            <div style="font-size:13.5px;color:#C8CFCA"><span style="color:#F5BE2A">★★★★★</span> 0.0 · 0,000 verified reviews</div>
+            <div style="display:flex;gap:8px">
+              <button type="button" onClick="{{ reviewsPrev }}" style="appearance:none;width:38px;height:38px;border:1px solid rgba(255,255,255,.3);background:none;cursor:pointer;font-size:15px;color:#fff" style-hover="background:rgba(255,255,255,.12)">←</button>
+              <button type="button" onClick="{{ reviewsNext }}" style="appearance:none;width:38px;height:38px;border:1px solid rgba(255,255,255,.3);background:none;cursor:pointer;font-size:15px;color:#fff" style-hover="background:rgba(255,255,255,.12)">→</button>
+            </div>
+          </div>
+        </div>
+        <div id="y22-reviews" data-scroller="1" style="display:flex;gap:clamp(10px,1.4vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth">
+          <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="4">
+            <article style="flex:0 0 auto;width:clamp(260px,25vw,340px);scroll-snap-align:start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);padding:22px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="width:44px;height:44px;flex:0 0 auto;border-radius:50%;background:repeating-linear-gradient(135deg,#4E5A67 0 6px,#46525F 6px 12px)"></span>
+                <span>
+                  <span style="display:block;font-size:14.5px;font-weight:700">{{ r.name }}</span>
+                  <span style="display:block;font-size:12.5px;color:#9AA3AC">{{ r.meta }}</span>
+                </span>
+              </div>
+              <div style="color:#F5BE2A;font-size:14px;letter-spacing:.08em">★★★★★</div>
+              <p style="margin:0;font-size:14px;line-height:1.55;color:#E3E8EC;text-wrap:pretty">{{ r.text }}</p>
+              <div style="margin-top:auto;padding-top:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#70BC9C">✓ Verified Purchase</div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ BLOG (optional) ============ -->
+  <sc-if value="{{ sec.blog }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Blog" style="padding:clamp(52px,6vw,88px) 0">
+      <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)">
+        <div style="margin-bottom:clamp(20px,2.5vw,30px)">
+          <h2 style="margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:700;letter-spacing:-.02em">Guides, tips &amp; trends</h2>
+          <p style="margin:8px 0 0;font-size:14.5px;color:#6B7683">Hidden until real editorial content is published.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(10px,1.4vw,18px)">
+          <sc-for list="{{ posts }}" as="b" hint-placeholder-count="3">
+            <a href="#" style="display:flex;flex-direction:column;border:1px solid #E6EAEF" style-hover="border-color:#35404C">
+              <span style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#F2F5F8 0 10px,#E8EDF3 10px 20px);display:flex;align-items:flex-end;padding:12px;font:500 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A939D">article image</span>
+              <span style="padding:18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#019067">{{ b.tag }}</span>
+                <span style="font-size:16px;font-weight:600;line-height:1.3">{{ b.title }}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background:#2C2B2A;color:#EFF2F6">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,4vw,56px) clamp(28px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(24px,3vw,44px)">
+      <div style="grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,3vw,44px);align-items:start;padding-bottom:clamp(28px,3vw,44px);border-bottom:1px solid rgba(239,242,246,.16)">
+        <div>
+          <div style="margin-bottom:16px">
+            <img src="assets/22yards-logo.png" alt="22 Yards — precision. performance." style="display:block;height:44px;width:auto;filter:brightness(0) invert(1)">
+          </div>
+          <p style="margin:0;max-width:34ch;font-size:14px;line-height:1.6;color:#9AA3AC">Everything you need to play. 100% authentic equipment across 16 sports, with expert guidance from people who play.</p>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F5BE2A;margin-bottom:12px">Join Our Community</div>
+          <div style="display:flex;gap:0;max-width:400px;flex-wrap:wrap">
+            <input type="email" placeholder="Your email address" style="flex:1 1 180px;min-width:0;appearance:none;border:1px solid rgba(239,242,246,.28);background:none;outline:none;color:#fff;font-family:inherit;font-size:14px;padding:14px 16px">
+            <button type="button" style="appearance:none;border:0;cursor:pointer;background:#019067;color:#fff;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 22px">Subscribe</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+            <sc-for list="{{ socials }}" as="s" hint-placeholder-count="5">
+              <a href="#" style="color:#C8CFCA;border:1px solid rgba(239,242,246,.22);padding:8px 12px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase" style-hover="background:#fff;color:#2C2B2A">{{ s }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <sc-for list="{{ footerColumns }}" as="c" hint-placeholder-count="6">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:14px">{{ c.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ c.items }}" as="i" hint-placeholder-count="5">
+              <a href="#" style="font-size:13.5px;color:#9AA3AC" style-hover="color:#70BC9C">{{ i }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border-top:1px solid rgba(239,242,246,.16)">
+      <div style="max-width:1440px;margin:0 auto;padding:20px clamp(16px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+        <div style="font-size:12.5px;color:#7F8890">© 2026 22 Yards. All rights reserved. · {{ market.legal }}</div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7F8890">Secure payments</span>
+          <sc-for list="{{ market.payments }}" as="p" hint-placeholder-count="4">
+            <span style="border:1px solid rgba(239,242,246,.2);padding:6px 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#C8CFCA">{{ p }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;navStyle&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;rail&quot;, &quot;classic&quot;], &quot;default&quot;: &quot;rail&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Navigation&quot;},
+  &quot;market&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;India&quot;, &quot;USA&quot;], &quot;default&quot;: &quot;India&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Market&quot;},
+  &quot;showBrands&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showLegendLineup&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showSportStrip&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showExperience&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showFinder&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showMissions&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showEducation&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showNewArrivals&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showCommunity&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showReviews&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showBlog&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;}
+}">
+class Component extends DCLogic {
+  /* ================= DESIGN TOKENS ================= */
+  T = {
+    ink: '#2C2B2A', navy: '#35404C', mist: '#EFF2F6', sage: '#C8CFCA', sand: '#B7B2A5',
+    green: '#019067', mint: '#70BC9C', coral: '#F15B47', yellow: '#F5BE2A', cream: '#F6F8ED',
+    line: '#E6EAEF', muted: '#6B7683'
+  };
+
+  /* ================= MARKET CONFIG ================= */
+  MARKET_CONFIG = {
+    India: {
+      label: 'India', cur: '₹', currencyLabel: 'INR ₹',
+      promo: 'Flat ₹500 OFF your first order above ₹5,000 — code PLAY500',
+      legal: 'India store · GST invoicing · Ships nationwide',
+      payments: ['UPI', 'Cards', 'Net Banking', 'COD']
+    },
+    USA: {
+      label: 'USA', cur: '$', currencyLabel: 'USD $',
+      promo: 'Free express shipping on US orders above $99',
+      legal: 'USA store · Ships from regional warehouses',
+      payments: ['Cards', 'PayPal', 'Apple Pay', 'Shop Pay']
+    }
+  };
+
+  /* ================= CONTENT CONFIG ================= */
+  SPORTS = ['Cricket', 'Football', 'Badminton', 'Tennis', 'Padel', 'Pickleball', 'Basketball', 'Volleyball', 'Hockey', 'Table Tennis', 'Running', 'Fitness & Gym', 'Cycling', 'Swimming', 'Outdoor & Adventure', 'Other Sports'];
+  PLAYERS = ['Kids', 'Juniors', 'Adults', 'Beginners', 'Competitive', 'Professional'];
+  NEEDS = ['Complete Kits', 'Protection', 'Training', 'Footwear', 'Apparel', 'Customization', 'Bulk Orders'];
+  LEVELS = ['Beginner', 'Recreational', 'Competitive', 'Professional'];
+
+  /* Sport rail groupings — used by the rail-style mega menu. */
+  /* Shop by Sport rail. Groups follow how people shop, not an A–Z list; every entry
+     is one of the 16 SPORTS. `subs` are the top buying routes inside a sport. */
+  SPORT_GROUPS = [
+    { title: 'Cricket', note: 'Our home game', items: [
+      { label: 'Cricket', note: 'Bats, balls, protection & whites', subs: ['Cricket Bats', 'Batting Gloves & Pads', 'Helmets & Protection', 'Balls', 'Kit Bags', 'Shoes & Spikes'] }
+    ] },
+    { title: 'Racket Sports', note: 'Rackets, strings & shuttles', items: [
+      { label: 'Badminton', note: 'Rackets, shuttles, grips', subs: ['Rackets', 'Shuttlecocks', 'Strings & Grips'] },
+      { label: 'Tennis', note: 'Rackets, balls, strings' },
+      { label: 'Padel', note: 'Fast-growing — new range', flag: 'New' },
+      { label: 'Pickleball', note: 'Paddles & balls', flag: 'New' },
+      { label: 'Table Tennis', note: 'Bats, balls, tables' }
+    ] },
+    { title: 'Team Sports', note: 'Match day & training', items: [
+      { label: 'Football', note: 'Boots, balls, training gear', subs: ['Boots', 'Footballs', 'Goalkeeping', 'Training Aids'] },
+      { label: 'Basketball', note: 'Balls, hoops, footwear' },
+      { label: 'Volleyball', note: 'Balls, nets, knee pads' },
+      { label: 'Hockey', note: 'Sticks, protection, shoes' }
+    ] },
+    { title: 'Run, Ride & Swim', note: 'Endurance & distance', items: [
+      { label: 'Running', note: 'Shoes, apparel, accessories' },
+      { label: 'Cycling', note: 'Helmets, kit, accessories' },
+      { label: 'Swimming', note: 'Goggles, caps, swimwear' }
+    ] },
+    { title: 'Fitness & Outdoor', note: 'Train & explore', items: [
+      { label: 'Fitness & Gym', note: 'Weights, mats, recovery' },
+      { label: 'Outdoor & Adventure', note: 'Trekking & camping gear' },
+      { label: 'Other Sports', note: 'Boxing, skating, archery & more' }
+    ] }
+  ];
+
+  /* Nav items accept either a plain string or { label, subs: [...] } for one level of subcategory. */
+  NAV_CONFIG = [
+    { key: 'sport', label: 'Shop by Sport', tiles: 'SPORTS', everySport: true, allLabel: 'Every Sport', quick: ['Cricket Bats', 'Batting Gloves', 'Badminton Rackets', 'Football Boots', 'Padel Rackets'], featureKicker: 'New Season', featureTitle: 'Padel & Pickleball have landed', featureCta: 'Explore', featureFile: 'Cricket picture.jpg' },
+    { key: 'level', label: 'Shop by Level', allLabel: 'All Levels', quick: ['Junior Kits', 'Beginner Bundles', 'Club Cricket', 'Academy Supply', 'Size Guides'], columns: [
+        { title: 'Stage', items: ['Grassroot', 'Junior', 'Youth', 'Senior', 'Adult'] },
+        { title: 'Ability', items: ['Beginner', 'Recreational', 'Competitive', 'Professional'] },
+        { title: 'Guidance', items: ['Which bat is right for me?', 'Choosing a racket', 'Protection explained'] }
+      ], featureKicker: 'Guided', featureTitle: 'Find your game in 3 steps', featureCta: 'Start', featureFile: 'A Modern Cricket Bat.jpg' },
+    { key: 'need', label: 'Shop by Need', allLabel: 'Shop All Needs', quick: ['Complete Kits', 'Helmets', 'Kit Bags', 'Bulk Order', 'Customization'], columns: [
+        { title: 'Kit', items: ['Complete Kits', 'Protection', 'Footwear', 'Apparel'] },
+        { title: 'Practice', items: ['Training'] },
+        { title: 'Made to order', items: ['Customization', 'Bulk Order'] }
+      ], featureKicker: 'Clubs & Academies', featureTitle: 'Kit the whole squad', featureCta: 'Bulk Enquiry', featureFile: 'Wicket-Keeping Gloves.jpg' },
+    { key: 'services', label: 'Services', allLabel: 'All Services', quick: ['Bat Knocking', 'Racquet Stringing', 'Coaching Enquiry', 'Tournament Enquiry'], columns: [
+        { title: 'On the field', items: ['Sports Coaching', { label: 'Tournament', subs: ['Journalism', 'Scoring'] }, 'Corporate Event'] },
+        { title: 'Equipment care', items: ['Bat Knocking', 'Racquet Stringing'] }
+      ], featureKicker: 'Beyond retail', featureTitle: 'Coaching, tournaments & equipment care', featureCta: 'Enquire', featureFile: 'Cricket at MELZ Stadium 02.jpg' },
+    { key: 'tech', label: 'Tech Solutions', allLabel: 'All Tech Solutions', quick: ['AI Service', 'AR / VR', 'App Implementation', 'Digital Marketing'], columns: [
+        { title: 'IT', items: [{ label: 'IT Services', subs: ['AI Service', 'AR / VR', 'Application Implementation'] }] },
+        { title: 'Growth', items: ['Digital Marketing'] }
+      ], featureKicker: 'Sports tech', featureTitle: 'AI, AR/VR and apps for sport', featureCta: 'Talk To Us', featureFile: 'Virtual reality headset.jpg' },
+    { key: 'legend', label: 'Legend Lineup', allLabel: 'View Full Lineup', quick: ['Signature Bats', 'Signature Gloves', 'Limited Editions'], columns: [
+        { title: 'Signature series', items: ['Player Name 01 Series', 'Player Name 02 Series', 'Player Name 03 Series', 'Player Name 04 Series'] },
+        { title: 'Shop', items: ['Signature Bats', 'Signature Gloves', 'Limited Editions', 'Autograph Bats'] }
+      ], featureKicker: 'Endorsed', featureTitle: 'Played by the pros', featureCta: 'View Lineup', featureFile: 'Harry Ormandy Batting.jpg' }
+  ];
+
+  HERO_STATS = [
+    { k: '16', v: 'Sports covered' },
+    { k: '100%', v: 'Authentic gear' },
+    { k: '00K+', v: 'Players served' }
+  ];
+
+  TRUST_CONFIG = [
+    { title: 'Trusted Manufacturers', note: 'Direct brand partnerships' },
+    { title: 'Expert Guidance', note: 'Size & level advice before you buy' },
+    { title: 'Reliable Delivery', note: 'Tracked dispatch' },
+    { title: 'Easy Returns', note: 'Simple 00-day window' }
+  ];
+
+  /* `file` = a Wikimedia Commons filename, served live in its original brand artwork.
+     Brands with no `file` fall back to a typeset name tile until licensed artwork
+     is dropped into assets/ — set `src` on any entry to point at a local file. */
+  BRANDS_CONFIG = [
+    { name: 'MRF', sport: 'Cricket', file: 'Madras_Rubber_Factory_logo.svg', dot: '#F15B47' },
+    { name: 'Yonex', sport: 'Badminton', file: 'Logo-Yonex.svg', dot: '#35404C' },
+    { name: 'Kookaburra', sport: 'Cricket', dot: '#F5BE2A' },
+    { name: 'SG', sport: 'Cricket', dot: '#019067' },
+    { name: 'SS', sport: 'Cricket', dot: '#019067' },
+    { name: 'Gray-Nicolls', sport: 'Cricket', dot: '#35404C' },
+    { name: 'Gunn & Moore', sport: 'Cricket', dot: '#019067' },
+    { name: 'Adidas', sport: 'Multi-sport', file: 'Adidas_logo.svg', dot: '#2C2B2A' },
+    { name: 'Nike', sport: 'Multi-sport', file: 'Logo_NIKE.svg', dot: '#2C2B2A' },
+    { name: 'Wilson', sport: 'Tennis', file: 'Wilson-logo.svg', dot: '#F15B47' },
+    { name: 'Head', sport: 'Tennis · Padel', file: 'Head_logo.svg', dot: '#35404C' },
+    { name: 'Babolat', sport: 'Tennis · Padel', file: 'Babolat_logo.svg', dot: '#F5BE2A' },
+    { name: 'Spalding', sport: 'Basketball', file: 'Spalding_logo.svg', dot: '#F5BE2A' },
+    { name: 'Asics', sport: 'Running', file: 'Asics_Logo.svg', dot: '#35404C' },
+    { name: 'Reebok', sport: 'Fitness', file: 'Reebok_2019_logo.svg', dot: '#F15B47' },
+    { name: 'Umbro', sport: 'Football', file: 'Umbro_logo.svg', dot: '#019067' },
+    { name: 'Nivia', sport: 'Football', file: 'Nivia_Sports_logo.svg', dot: '#019067' },
+    { name: 'Decathlon', sport: 'Multi-sport', file: 'Decathlon_Logo.svg', dot: '#35404C' }
+  ];
+
+  LEGEND_CONFIG = [
+    { name: 'Player Name 01', series: 'Signature Bat Series', note: 'Short supporting line about the series — replace with approved copy.', tag: 'Signature' },
+    { name: 'Player Name 02', series: 'Batting Gloves Line', note: 'Short supporting line about the series — replace with approved copy.', tag: 'Endorsed' },
+    { name: 'Player Name 03', series: 'All-Rounder Collection', note: 'Short supporting line about the series — replace with approved copy.', tag: 'Limited' },
+    { name: 'Player Name 04', series: 'Pro Protection Set', note: 'Short supporting line about the series — replace with approved copy.', tag: 'Signature' }
+  ];
+
+  /* Photography served live from Wikimedia Commons. Replace `file` with a local
+     assets/ path (via `img`) once the client's own shoot is available. */
+  COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
+  pic(file, width) { return this.COMMONS + encodeURIComponent(file) + '?width=' + (width || 900); }
+
+  SPORT_STRIP = [
+    { name: 'Cricket', bg: '#35404C', file: 'Harry Ormandy Batting.jpg', pos: '50% 25%' },
+    { name: 'Football', bg: '#2C2B2A', file: 'Football training.jpg', pos: '50% 30%' },
+    { name: 'Badminton', bg: '#019067', file: 'Badminton player.jpg', pos: '50% 35%' },
+    { name: 'Tennis', bg: '#5C6672', file: 'Tennis Racket and Balls.jpg', pos: '50% 50%' },
+    { name: 'Padel', bg: '#70BC9C', file: 'Padel court.jpg', pos: '50% 45%' },
+    { name: 'Pickleball', bg: '#B7B2A5', file: 'Aerial Pickleball Courts.jpg', pos: '50% 50%' },
+    { name: 'Basketball', bg: '#F15B47', file: 'Basketball through hoop.jpg', pos: '50% 40%' },
+    { name: 'Running', bg: '#4A5560', file: 'Marathon.jpg', pos: '50% 35%' },
+    { name: 'Fitness & Gym', bg: '#7D7669', file: 'Gym.jpg', pos: '50% 45%' }
+  ];
+
+  EXPERIENCE_CONFIG = [
+    { title: 'Beginner', line: 'Start your sporting journey.', cta: 'Get Started', bg: '#5C6672', file: 'Children playing football.jpg', pos: '50% 30%' },
+    { title: 'Recreational', line: 'Play for the love of it.', cta: 'Go Play', bg: '#019067', file: 'Padel court.jpg', pos: '50% 45%' },
+    { title: 'Competitive', line: 'Train harder. Perform better.', cta: 'Gear Up', bg: '#35404C', file: 'Cricket at MELZ Stadium 02.jpg', pos: '50% 30%' },
+    { title: 'Professional', line: 'Built for the highest level.', cta: 'Shop Pro', bg: '#2C2B2A', file: 'Football iu 1996.jpg', pos: '50% 35%' }
+  ];
+
+  FINDER_CONFIG = [
+    { key: 'who', q: 'Shopping for', question: 'Who are you shopping for?', hint: 'Pick one', options: ['Myself', 'My Child', 'My Team', 'My Academy'] },
+    { key: 'sport', q: 'Sport', question: 'What do you play?', hint: 'Pick one', options: ['Cricket', 'Football', 'Badminton', 'Tennis', 'Padel', 'Pickleball'] },
+    { key: 'level', q: 'Level', question: 'What is your level?', hint: 'Last step', options: ['Beginner', 'Recreational', 'Competitive', 'Professional'] }
+  ];
+
+  MISSION_CONFIG = [
+    { label: 'Best Sellers', desc: 'The gear players come back for, across every sport.' },
+    { label: 'Complete Your Kit', desc: 'Fill the gaps — protection, bags and the bits people forget.' },
+    { label: 'Most Loved by Beginners', desc: 'Easy first choices, sized and weighted for new players.' },
+    { label: 'Match Day Essentials', desc: 'Everything that travels with you on game day.' },
+    { label: 'Under Budget', desc: 'Strong gear inside a sensible spend.' },
+    { label: 'Train Like a Pro', desc: 'Practice equipment used at academy and club level.' }
+  ];
+
+  EDUCATION_CONFIG = [
+    { n: '01', title: 'English vs Kashmir Willow', note: 'Which suits your game' },
+    { n: '02', title: 'Bat Weight', note: 'Light, medium or heavy' },
+    { n: '03', title: 'Bat Size', note: 'Sizing by height & age' },
+    { n: '04', title: 'Grade', note: 'What the grades mean' },
+    { n: '05', title: 'Handle & Profile', note: 'Feel and pick-up' },
+    { n: '06', title: 'Edge & Sweet Spot', note: 'Where the runs come from' }
+  ];
+
+  REVIEWS_CONFIG = [
+    { name: 'Customer Name 01', meta: 'City, Country · Club Cricketer', text: 'Review copy placeholder — replace with a real verified review covering authenticity, pricing and delivery.' },
+    { name: 'Customer Name 02', meta: 'City, Country · Parent', text: 'Review copy placeholder — replace with a real verified review about sizing help for a junior player.' },
+    { name: 'Customer Name 03', meta: 'City, Country · Badminton Player', text: 'Review copy placeholder — replace with a real verified review about product range and support.' },
+    { name: 'Customer Name 04', meta: 'City, Country · Academy Coach', text: 'Review copy placeholder — replace with a real verified review about bulk/team orders.' }
+  ];
+
+  COMMUNITY_STATS = [
+    { k: '000+', v: 'Clubs supplied' }, { k: '00', v: 'Academy partners' }, { k: '00K', v: 'Community members' }
+  ];
+
+  BLOG_CONFIG = [
+    { tag: 'Buying Guide', title: 'Article headline placeholder for a buying guide' },
+    { tag: 'Training', title: 'Article headline placeholder for a training piece' },
+    { tag: 'Community', title: 'Article headline placeholder for a community story' }
+  ];
+
+  FOOTER_CONFIG = [
+    { title: 'About 22 Yards', items: ['About Us', 'Our Story', 'Our Values', 'Careers', 'Contact Us'] },
+    { title: 'Help & Support', items: ['FAQ', 'Shipping', 'Returns', 'Size Guide', 'Contact Us'] },
+    { title: 'My Order', items: ['Track Order', 'Order History', 'Returns', 'Wishlist'] },
+    { title: 'Shop Sports', items: ['Cricket', 'Football', 'Badminton', 'Tennis', 'Padel', 'Pickleball'] },
+    { title: 'Services', items: ['Sports Coaching', 'Tournaments', 'Corporate Events', 'Bat Knocking', 'Racquet Stringing'] },
+    { title: 'Tech Solutions', items: ['AI Service', 'AR / VR', 'Application Implementation', 'Digital Marketing'] },
+    { title: 'Explore', items: ['Legend Lineup', 'Buying Guides', 'Community', 'Blog'] },
+    { title: 'Market', items: ['India', 'USA', 'Shipping Policy', 'Store Locator'] }
+  ];
+
+  SOCIALS = ['Instagram', 'Facebook', 'YouTube', 'X', 'LinkedIn'];
+
+  state = {
+    market: null, openMenu: null, drawer: false, acc: null, wish: {},
+    sport: 'Cricket', step: 0, answers: {}, done: false, mission: 0, w: 1440, rail: 0
+  };
+
+  componentDidMount() {
+    this.onResize = () => {
+      const w = document.documentElement.clientWidth || window.innerWidth;
+      if (w && w !== this.state.w) this.setState({ w: w });
+    };
+    this.onResize();
+    requestAnimationFrame(this.onResize);
+    setTimeout(this.onResize, 120);
+    window.addEventListener('resize', this.onResize);
+    if (typeof ResizeObserver !== 'undefined') {
+      this.ro = new ResizeObserver(this.onResize);
+      this.ro.observe(document.documentElement);
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    if (this.ro) this.ro.disconnect();
+  }
+
+  scroller(id) {
+    const el = document.getElementById(id);
+    if (!el) return { prev: () => {}, next: () => {} };
+    const d = Math.max(240, Math.round(el.clientWidth * 0.8));
+    return { prev: () => el.scrollBy({ left: -d, behavior: 'smooth' }), next: () => el.scrollBy({ left: d, behavior: 'smooth' }) };
+  }
+
+  makeProducts(missionIndex) {
+    const cur = this.marketCfg().cur;
+    const money = (a) => cur + ' ' + a;
+    const base = [
+      { brand: 'Brand Name', name: 'English Willow Bat — Model Name', badge: 'Best Seller', avail: 'In stock', cta: 'Select Options' },
+      { brand: 'Brand Name', name: 'Batting Gloves — Model Name', badge: 'Best Seller', avail: 'In stock', cta: 'Add To Cart' },
+      { brand: 'Brand Name', name: 'Cricket Helmet — Model Name', badge: 'Top Rated', avail: 'Low stock', cta: 'Select Options' },
+      { brand: 'Brand Name', name: 'Badminton Racket — Model Name', badge: 'Player Pick', avail: 'In stock', cta: 'Add To Cart' },
+      { brand: 'Brand Name', name: 'Complete Kit Bag — Model Name', badge: 'Kit', avail: 'In stock', cta: 'Select Options' },
+      { brand: 'Brand Name', name: 'Football — Model Name', badge: 'Value', avail: 'In stock', cta: 'Add To Cart' },
+      { brand: 'Brand Name', name: 'Padel Racket — Model Name', badge: 'New Sport', avail: 'Pre-order', cta: 'Notify Me' },
+      { brand: 'Brand Name', name: 'Training Set — Model Name', badge: 'Train', avail: 'In stock', cta: 'Add To Cart' }
+    ];
+    const start = (missionIndex * 2) % base.length;
+    const out = [];
+    for (let i = 0; i < 4; i++) {
+      const p = base[(start + i) % base.length];
+      out.push(Object.assign({}, p, { id: 'm' + missionIndex + '-' + i, price: money('0,000'), mrp: money('0,000'), reviews: '00' }));
+    }
+    return out;
+  }
+
+  makeArrivals() {
+    const cur = this.marketCfg().cur;
+    return [
+      { id: 'n0', brand: 'Brand Name', name: 'Batting Gloves — Model Name', avail: 'In stock', cta: 'Select Options' },
+      { id: 'n1', brand: 'Brand Name', name: 'Cricket Ball — Model Name', avail: 'Out of stock', cta: 'Notify Me' },
+      { id: 'n2', brand: 'Brand Name', name: 'Hanging Ball Trainer — Model Name', avail: 'In stock', cta: 'Add To Cart' },
+      { id: 'n3', brand: 'Brand Name', name: 'Kashmir Willow Bat — Model Name', avail: 'Low stock', cta: 'Select Options' },
+      { id: 'n4', brand: 'Brand Name', name: 'Pickleball Paddle — Model Name', avail: 'Pre-order', cta: 'Notify Me' }
+    ].map(p => Object.assign(p, { price: cur + ' 0,000' }));
+  }
+
+  marketCfg() {
+    const key = this.state.market || this.props.market || 'India';
+    return this.MARKET_CONFIG[key] ? Object.assign({ key: key }, this.MARKET_CONFIG[key]) : Object.assign({ key: 'India' }, this.MARKET_CONFIG.India);
+  }
+
+  wishFor(p) {
+    const on = !!this.state.wish[p.id];
+    return Object.assign({}, p, {
+      wishLabel: on ? 'Saved' : 'Save',
+      wishBg: on ? '#019067' : 'rgba(255,255,255,.92)',
+      wishFg: on ? '#ffffff' : '#35404C',
+      wishBorder: on ? '#019067' : '#D5DCE5',
+      badgeBg: p.badge === 'Best Seller' ? '#2C2B2A' : (p.badge === 'Top Rated' ? '#019067' : '#B7B2A5'),
+      badgeFg: '#ffffff',
+      availFg: /out|pre/i.test(p.avail) ? '#F15B47' : (/low/i.test(p.avail) ? '#B08900' : '#019067'),
+      toggleWish: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState(s => ({ wish: Object.assign({}, s.wish, { [p.id]: !s.wish[p.id] }) })); }
+    });
+  }
+
+  renderVals() {
+    const T = this.T, P = this.props, S = this.state;
+    const m = this.marketCfg();
+    const w = S.w;
+    const isMobile = w < 900;
+    const quadCols = w < 660 ? '1fr' : (w < 1080 ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))');
+
+    /* nav + mega menu */
+    const nav = this.NAV_CONFIG.map((n, i) => ({
+      label: n.label,
+      fg: S.openMenu === i ? T.green : T.ink,
+      line: S.openMenu === i ? T.green : 'transparent',
+      enter: () => this.setState(s => ({ openMenu: i, rail: s.openMenu === i ? s.rail : 0 })),
+      accordion: () => this.setState(s => ({ acc: s.acc === i ? null : i })),
+      _i: i,
+      accOpen: S.acc === i,
+      sign: S.acc === i ? '−' : '+',
+      flat: n.tiles
+        ? (n.everySport ? ['Every Sport'] : []).concat(this.SPORTS)
+        : n.columns.reduce((a, c) => a.concat(c.items.reduce((b, i) => b.concat(typeof i === 'string' ? [i] : [i.label].concat(i.subs)), [])), [])
+    }));
+    const openCfg = S.openMenu === null ? null : this.NAV_CONFIG[S.openMenu];
+    const norm = (items) => items.map(i => typeof i === 'string'
+      ? { label: i, hasSubs: false, subs: [], note: '', hasNote: false, flag: '', hasFlag: false }
+      : {
+          label: i.label,
+          subs: i.subs || [],
+          hasSubs: !!(i.subs && i.subs.length),
+          note: i.note || '',
+          hasNote: !!i.note,
+          flag: i.flag || '',
+          hasFlag: !!i.flag
+        });
+    const menu = openCfg ? {
+      hasTiles: !!openCfg.tiles,
+      hasColumns: !openCfg.tiles,
+      tiles: openCfg.tiles ? (openCfg.everySport ? ['Every Sport'] : []).concat(this.SPORTS) : [],
+      columns: (openCfg.columns || []).map(c => ({ title: c.title, items: norm(c.items) })),
+      featureKicker: openCfg.featureKicker,
+      featureTitle: openCfg.featureTitle,
+      featureCta: openCfg.featureCta,
+      featureImg: openCfg.featureFile ? 'url(' + this.pic(openCfg.featureFile, 600) + ')' : 'none'
+    } : { hasTiles: false, hasColumns: false, tiles: [], columns: [] };
+
+    /* rail-style mega menu: vertical group rail on the left swaps the item grid */
+    const useRail = (P.navStyle ?? 'rail') === 'rail';
+    const menuVisible = S.openMenu !== null && !isMobile;
+    const railCols = openCfg
+      ? (openCfg.tiles
+          ? this.SPORT_GROUPS.map(g => ({ title: g.title, note: g.note, items: norm(g.items) }))
+          : menu.columns)
+      : [];
+    const railIdx = Math.min(S.rail, Math.max(0, railCols.length - 1));
+    const rail = {
+      groups: railCols.map((c, gi) => ({
+        title: c.title,
+        note: c.note || '',
+        hasNote: !!c.note,
+        n: c.items.length > 1 ? String(c.items.length).padStart(2, '0') : '',
+        bg: gi === railIdx ? '#F6F8ED' : 'transparent',
+        bar: gi === railIdx ? T.green : 'transparent',
+        fg: gi === railIdx ? T.ink : '#5B6570',
+        count: gi === railIdx ? T.green : '#6B7683',
+        activate: () => this.setState({ rail: gi })
+      })),
+      activeTitle: railCols[railIdx] ? railCols[railIdx].title : '',
+      items: railCols[railIdx] ? railCols[railIdx].items : [],
+      allLabel: openCfg ? (openCfg.allLabel || 'View All') : '',
+      quick: openCfg ? (openCfg.quick || ['Cricket Bats', 'Complete Kits', 'Bat Knocking', 'Bulk Order', 'Buying Guides']) : []
+    };
+
+    /* market pills */
+    const marketOptions = Object.keys(this.MARKET_CONFIG).map(k => {
+      const on = m.key === k;
+      return {
+        label: k,
+        bg: on ? '#EFF2F6' : 'transparent',
+        fg: on ? '#2C2B2A' : '#B9C1C9',
+        dBg: on ? '#35404C' : 'transparent',
+        dFg: on ? '#ffffff' : '#35404C',
+        select: () => this.setState({ market: k })
+      };
+    });
+
+    /* sport strip */
+    const sportTiles = this.SPORT_STRIP.map(s => ({
+      name: s.name,
+      bg: s.bg,
+      img: s.file ? 'linear-gradient(to top,rgba(20,24,28,.82) 0%,rgba(20,24,28,.28) 45%,rgba(20,24,28,.12) 100%),url(' + this.pic(s.file, 700) + ')' : 'none',
+      pos: s.pos || '50% 50%',
+      ring: S.sport === s.name ? '3px solid ' + T.yellow : '0px solid transparent',
+      select: () => this.setState({ sport: s.name })
+    }));
+
+    /* guided finder */
+    const steps = this.FINDER_CONFIG;
+    const step = Math.min(S.step, steps.length - 1);
+    const cur = steps[step];
+    const picked = S.answers[cur.key];
+    const finder = {
+      stepLabel: (step + 1) + ' of ' + steps.length,
+      hint: cur.hint,
+      question: cur.question,
+      options: cur.options.map(o => ({
+        label: o,
+        bg: picked === o ? '#F6F8ED' : '#ffffff',
+        border: picked === o ? T.green : '#D5DCE5',
+        fg: picked === o ? '#0b5c43' : T.ink,
+        select: () => this.setState(s => ({ answers: Object.assign({}, s.answers, { [cur.key]: o }) }))
+      })),
+      ctaLabel: step === steps.length - 1 ? 'Show My Gear' : 'Continue',
+      ctaBg: picked ? T.green : '#B9C1C9',
+      canBack: step > 0,
+      next: () => { if (!picked) return; if (step === steps.length - 1) this.setState({ done: true }); else this.setState({ step: step + 1 }); },
+      back: () => this.setState({ step: Math.max(0, step - 1) }),
+      reset: () => this.setState({ step: 0, answers: {}, done: false }),
+      resultTitle: [S.answers.level, S.answers.sport].filter(Boolean).join(' · ') || 'Your shortlist',
+      resultLine: 'Shortlist for ' + (S.answers.who || 'you') + ' — ' + (S.answers.sport || 'your sport') + ', ' + (S.answers.level || 'any level') + '. Replace with a real merchandised collection.',
+      resultTiles: ['Recommended kit', 'Sized correctly', 'Protection', 'Footwear']
+    };
+    const finderProgress = steps.map((s, i) => ({
+      n: '0' + (i + 1),
+      q: s.q,
+      answer: S.answers[s.key] || '',
+      bg: S.answers[s.key] ? T.green : (i === step && !S.done ? '#ffffff' : 'rgba(255,255,255,.12)'),
+      fg: S.answers[s.key] ? '#ffffff' : (i === step && !S.done ? T.navy : '#C8CFCA'),
+      label: i === step && !S.done ? '#ffffff' : '#AEB7C0'
+    }));
+
+    /* missions */
+    const missionTabs = this.MISSION_CONFIG.map((t, i) => ({
+      label: i === 4 ? (m.cur === '₹' ? 'Under ₹5,000' : 'Under $99') : t.label,
+      line: S.mission === i ? T.ink : 'transparent',
+      fg: S.mission === i ? T.ink : '#8A939D',
+      select: () => this.setState({ mission: i })
+    }));
+
+    const sec = {
+      brands: P.showBrands ?? true,
+      legendLineup: P.showLegendLineup ?? true,
+      sportStrip: P.showSportStrip ?? true,
+      experience: P.showExperience ?? true,
+      finder: P.showFinder ?? true,
+      missions: P.showMissions ?? true,
+      education: P.showEducation ?? true,
+      newArrivals: P.showNewArrivals ?? true,
+      community: P.showCommunity ?? true,
+      reviews: P.showReviews ?? true,
+      blog: P.showBlog ?? false
+    };
+
+    return {
+      market: m, marketOptions, isMobile, isDesktop: !isMobile, sec, quadCols,
+      nav, menu, rail,
+      menuClassicOpen: menuVisible && !useRail,
+      menuRailOpen: menuVisible && useRail,
+      closeMenu: () => this.setState({ openMenu: null }),
+      drawer: S.drawer,
+      openDrawer: () => this.setState({ drawer: true }),
+      closeDrawer: () => this.setState({ drawer: false, acc: null }),
+      wishCount: String(Object.values(S.wish).filter(Boolean).length).padStart(2, '0'),
+      heroStats: this.HERO_STATS, trust: this.TRUST_CONFIG,
+      brands: this.BRANDS_CONFIG.map(b => Object.assign({}, b, {
+        hasLogo: !!(b.src || b.file),
+        noLogo: !(b.src || b.file),
+        logo: b.src || (b.file ? 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(b.file) : ''),
+        onLogoError: (e) => { const t = e.currentTarget; t.style.visibility = 'hidden'; }
+      })),
+      legends: this.LEGEND_CONFIG, sportTiles,
+      communityImg: 'url(' + this.pic('Team huddle.jpg', 1100) + ')',
+      experiences: this.EXPERIENCE_CONFIG.map(e => Object.assign({}, e, {
+        img: e.file ? 'linear-gradient(to top,rgba(20,24,28,.84) 0%,rgba(20,24,28,.34) 50%,rgba(20,24,28,.16) 100%),url(' + this.pic(e.file, 800) + ')' : 'none',
+        pos: e.pos || '50% 50%'
+      })),
+      finder, finderProgress, finderActive: !S.done, finderDone: S.done,
+      missionTabs, mission: this.MISSION_CONFIG[S.mission],
+      missionProducts: this.makeProducts(S.mission).map(p => this.wishFor(p)),
+      education: this.EDUCATION_CONFIG,
+      arrivals: this.makeArrivals().map(p => this.wishFor(p)),
+      communityStats: this.COMMUNITY_STATS, reviews: this.REVIEWS_CONFIG,
+      posts: this.BLOG_CONFIG, footerColumns: this.FOOTER_CONFIG, socials: this.SOCIALS,
+      brandsPrev: () => this.scroller('y22-brands').prev(), brandsNext: () => this.scroller('y22-brands').next(),
+      legendPrev: () => this.scroller('y22-legend').prev(), legendNext: () => this.scroller('y22-legend').next(),
+      sportsPrev: () => this.scroller('y22-sports').prev(), sportsNext: () => this.scroller('y22-sports').next(),
+      newPrev: () => this.scroller('y22-new').prev(), newNext: () => this.scroller('y22-new').next(),
+      reviewsPrev: () => this.scroller('y22-reviews').prev(), reviewsNext: () => this.scroller('y22-reviews').next()
+    };
+  }
+}
+</script>
+</body>
+</html>

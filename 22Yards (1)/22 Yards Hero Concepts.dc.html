@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #E9ECEF; -webkit-font-smoothing: antialiased; }
+  a { color: #35404C; text-decoration: none; }
+  a:hover { color: #F15B47; }
+  @keyframes hrise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes hfade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+
+<!-- ============================ TURN 3 ============================ -->
+<section style="font-family:Urbanist,Helvetica,sans-serif;color:#2C2B2A;padding:48px 48px 64px;display:flex;flex-direction:column;gap:30px">
+
+  <div style="max-width:1100px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Turn 3 · Campaign concepts · Hard &amp; confident</div>
+    <h1 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 82,'wght' 800;font-size:38px;letter-spacing:-.02em;line-height:1">Three campaigns, each with a device that survives cheap photography</h1>
+    <p style="margin:12px 0 0;font-size:15.5px;line-height:1.6;color:#5B6570;text-wrap:pretty">Every one of these is built so a phone-shot or stock image can't sink it: the photograph is either contained in a plate, pushed to near-silhouette, or paired with an identically graded twin. The recognisable asset is the <strong>device</strong> — a timestamp, a seam, a location plate — not the picture. Social extensions sit under each hero.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start">
+
+    <!-- ===================== 3A — BEFORE THE ROAR ===================== -->
+    <div id="3a" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">3A</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Before The Roar</span>
+        <span style="font-size:13.5px;color:#7A838D">Device: the timestamp · image pushed to near-silhouette, so any dark frame works</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#0E1114;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:{{ img.roar }};background-size:cover;background-position:50% 34%;filter:grayscale(1) contrast(1.5) brightness(.34)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(14,17,20,.97) 0%,rgba(14,17,20,.86) 40%,rgba(14,17,20,.5) 78%,rgba(14,17,20,.72) 100%)"></div>
+
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:40px 56px 50px;box-sizing:border-box">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+            <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto;filter:brightness(0) invert(1)">
+            <div style="text-align:right">
+              <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 72,'wght' 800;font-size:62px;line-height:.9;letter-spacing:-.04em;color:#F5BE2A;font-variant-numeric:tabular-nums">05:47</div>
+              <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(239,242,246,.55);margin-top:6px">Three hours to first ball</div>
+            </div>
+          </div>
+
+          <div style="flex:1"></div>
+
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:56px;flex-wrap:wrap">
+            <div style="max-width:800px">
+              <h2 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 70,'wght' 900;font-size:136px;line-height:.82;letter-spacing:-.05em;text-transform:uppercase;color:#fff">Before<br>the roar</h2>
+              <p style="margin:28px 0 0;font-size:19px;line-height:1.45;color:#B9C1C9;max-width:40ch">Nobody films the night before. The taped grip, the packed bag, the shoes by the door. That part is ours.</p>
+              <div style="display:flex;gap:24px;margin-top:34px;flex-wrap:wrap">
+                <a href="#" style="background:#F5BE2A;color:#0E1114;padding:20px 42px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#fff">Get ready →</a>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0;min-width:260px;padding-bottom:8px">
+              <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(239,242,246,.72);padding-bottom:12px;border-bottom:1px solid rgba(239,242,246,.16)">The list</div>
+              <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(239,242,246,.1)">
+                  <span style="width:9px;height:9px;flex:0 0 auto;background:{{ c.dot }}"></span>
+                  <span style="font-size:14.5px;font-weight:600;color:{{ c.fg }}">{{ c.label }}</span>
+                  <span style="margin-left:auto;font-size:12px;color:rgba(239,242,246,.72)">{{ c.note }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- social extension -->
+      <div style="display:flex;gap:14px;align-items:flex-start;padding-top:6px">
+        <div style="width:380px;height:380px;flex:0 0 auto;position:relative;background:#0E1114;overflow:hidden">
+          <div style="position:absolute;inset:0;background-image:{{ img.roar }};background-size:cover;background-position:50% 30%;filter:grayscale(1) contrast(1.5) brightness(.3)"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,17,20,.96) 0%,rgba(14,17,20,.4) 70%)"></div>
+          <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:26px;box-sizing:border-box">
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 72,'wght' 800;font-size:40px;line-height:.9;letter-spacing:-.04em;color:#F5BE2A;font-variant-numeric:tabular-nums">04:12</div>
+            <div style="flex:1"></div>
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 70,'wght' 900;font-size:46px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#fff">Before<br>the roar</div>
+            <div style="margin-top:14px;font-size:12.5px;color:#9AA3AC">22yards.com</div>
+          </div>
+        </div>
+        <div style="width:300px;height:533px;flex:0 0 auto;position:relative;background:#0E1114;overflow:hidden">
+          <div style="position:absolute;inset:0;background-image:{{ img.roar }};background-size:cover;background-position:55% 40%;filter:grayscale(1) contrast(1.5) brightness(.32)"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,17,20,.97) 0%,rgba(14,17,20,.3) 66%)"></div>
+          <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:26px;box-sizing:border-box">
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 72,'wght' 800;font-size:34px;line-height:.9;letter-spacing:-.04em;color:#F5BE2A;font-variant-numeric:tabular-nums">06:03</div>
+            <div style="flex:1"></div>
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 70,'wght' 900;font-size:44px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#fff">Before<br>the roar</div>
+            <div style="margin-top:16px;background:#F5BE2A;color:#0E1114;align-self:flex-start;padding:12px 18px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase">Swipe up · get ready</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;padding:4px 0 0">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Why it travels</div>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#5B6570;text-wrap:pretty">The timestamp is the whole campaign. Every asset is a different time before a different game — an infinite series that costs nothing to produce and is instantly recognisable at thumbnail size. Customers can post their own.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== 3B — EVERYONE'S SOMEBODY'S LEGEND ===================== -->
+    <div id="3b" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">3B</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Everyone's Somebody's Legend</span>
+        <span style="font-size:13.5px;color:#7A838D">Device: the seam · identical grade on both halves hides mismatched sources</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#14171A;overflow:hidden">
+        <div style="position:absolute;inset:0;display:flex">
+          <div style="flex:1;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background-image:{{ img.pro }};background-size:cover;background-position:62% 22%;filter:grayscale(1) contrast(1.36) brightness(.66)"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(20,23,26,.94) 0%,rgba(20,23,26,.24) 62%)"></div>
+          </div>
+          <div style="width:1px;background:rgba(239,242,246,.34);flex:0 0 auto"></div>
+          <div style="flex:1;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background-image:{{ img.next }};background-size:cover;background-position:48% 30%;filter:grayscale(1) contrast(1.36) brightness(.66)"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(20,23,26,.94) 0%,rgba(20,23,26,.24) 62%)"></div>
+          </div>
+        </div>
+
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:40px 48px 46px;box-sizing:border-box">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+            <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto;filter:brightness(0) invert(1)">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(239,242,246,.55)">Legend Lineup · No. 07</span>
+          </div>
+
+          <div style="flex:1;display:flex;align-items:flex-start;gap:0">
+            <div style="flex:1;padding-right:24px">
+              <div style="display:inline-flex;flex-direction:column;background:rgba(14,17,20,.72);padding:12px 16px">
+                <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff">Nicholas Pooran</span>
+                <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#F5BE2A;margin-top:3px">International · Pooran Series bat</span>
+              </div>
+            </div>
+            <div style="flex:1;padding-left:24px">
+              <div style="display:inline-flex;flex-direction:column;background:rgba(14,17,20,.72);padding:12px 16px">
+                <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff">Aarav, 11</span>
+                <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#F5BE2A;margin-top:3px">Sunday nets · Pooran Series bat</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center">
+            <h2 style="margin:0 auto;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:106px;line-height:.84;letter-spacing:-.05em;text-transform:uppercase;color:#fff;max-width:1000px">Everyone's<br>somebody's <span style="color:#F5BE2A">legend</span></h2>
+            <p style="margin:24px auto 0;font-size:18px;line-height:1.45;color:#C8CFCA;max-width:52ch">The same gear they play with. In the hands of whoever plays next.</p>
+            <a href="#" style="display:inline-block;margin-top:32px;background:#fff;color:#14171A;padding:20px 42px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#F5BE2A">Shop the lineup →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding-top:6px">
+        <div style="width:380px;height:380px;flex:0 0 auto;position:relative;background:#14171A;overflow:hidden;display:flex;flex-direction:column">
+          <div style="flex:1;display:flex;min-height:0">
+            <div style="flex:1;background-image:{{ img.pro }};background-size:cover;background-position:60% 24%;filter:grayscale(1) contrast(1.36) brightness(.62)"></div>
+            <div style="width:1px;background:rgba(239,242,246,.34)"></div>
+            <div style="flex:1;background-image:{{ img.next }};background-size:cover;background-position:48% 30%;filter:grayscale(1) contrast(1.36) brightness(.62)"></div>
+          </div>
+          <div style="padding:22px 24px 24px;background:#14171A">
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:34px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#fff">Everyone's<br>somebody's <span style="color:#F5BE2A">legend</span></div>
+          </div>
+        </div>
+        <div style="width:300px;height:533px;flex:0 0 auto;position:relative;background:#14171A;overflow:hidden;display:flex;flex-direction:column">
+          <div style="flex:1;position:relative;background-image:{{ img.pro }};background-size:cover;background-position:58% 24%;filter:grayscale(1) contrast(1.36) brightness(.62)"></div>
+          <div style="height:1px;background:rgba(239,242,246,.34)"></div>
+          <div style="flex:1;position:relative;background-image:{{ img.next }};background-size:cover;background-position:48% 32%;filter:grayscale(1) contrast(1.36) brightness(.62)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:22px 22px 26px;background:linear-gradient(to top,rgba(20,23,26,.97) 0%,rgba(20,23,26,0) 100%)">
+            <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:32px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#fff">Everyone's<br>somebody's <span style="color:#F5BE2A">legend</span></div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;padding:4px 0 0">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Why it travels</div>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#5B6570;text-wrap:pretty">The seam and the two name plates are the format — horizontal for feed, vertical for story. Every customer photo becomes the right-hand half, so the campaign is also an acquisition engine. It makes the money you already spend on Pooran and Pant work twice.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== 3C — IT'S 22 YARDS FROM HERE ===================== -->
+    <div id="3c" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">3C</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">It's 22 Yards From Here</span>
+        <span style="font-size:13.5px;color:#7A838D">Device: the location plate · image contained in a documentary band, so phone shots are on-brand</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#F6F8ED;overflow:hidden;display:flex;flex-direction:column;padding:40px 56px 44px;box-sizing:border-box">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px">
+          <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto">
+          <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A8F79">Plate 014 · submitted by a customer</span>
+        </div>
+
+        <h2 style="margin:26px 0 0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:118px;line-height:.82;letter-spacing:-.05em;text-transform:uppercase;color:#2C2B2A">It's 22 yards<br>from <span style="color:#F15B47">here</span></h2>
+
+        <div style="position:relative;flex:1;margin:30px 0 0;min-height:0;overflow:hidden;background:#DCE0CE">
+          <div style="position:absolute;inset:0;background-image:{{ img.street }};background-size:cover;background-position:50% 42%;filter:grayscale(.35) contrast(1.22) saturate(.85)"></div>
+          <div style="position:absolute;left:0;bottom:0;display:flex;align-items:stretch;background:#2C2B2A">
+            <span style="display:flex;align-items:center;background:#F15B47;color:#2C2B2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 800;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:0 14px">22 yd</span>
+            <span style="display:flex;flex-direction:column;justify-content:center;padding:12px 20px">
+              <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:#fff">Gully No. 4, Andheri East</span>
+              <span style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#B9C1C9;margin-top:3px">19.1176° N, 72.8697° E · every evening, six-thirty</span>
+            </span>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-top:26px">
+          <p style="margin:0;font-size:19px;line-height:1.45;color:#5B6152;max-width:44ch">A pitch is twenty-two yards. So is the walk from your door to wherever you actually play. Start there.</p>
+          <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+            <a href="#" style="background:#2C2B2A;color:#F6F8ED;padding:20px 42px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#F15B47;color:#2C2B2A">Start where you stand →</a>
+            <a href="#" style="color:#2C2B2A;font-size:13.5px;font-weight:600;border-bottom:1px solid #B5BBA4;padding-bottom:3px" style-hover="color:#F15B47;border-color:#F15B47">Send us your ground</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding-top:6px">
+        <div style="width:380px;height:380px;flex:0 0 auto;position:relative;background:#F6F8ED;overflow:hidden;display:flex;flex-direction:column;padding:22px;box-sizing:border-box">
+          <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:40px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#2C2B2A">It's 22 yards<br>from <span style="color:#F15B47">here</span></div>
+          <div style="position:relative;flex:1;margin-top:16px;overflow:hidden;background:#DCE0CE">
+            <div style="position:absolute;inset:0;background-image:{{ img.street }};background-size:cover;background-position:50% 44%;filter:grayscale(.35) contrast(1.22) saturate(.85)"></div>
+            <div style="position:absolute;left:0;bottom:0;display:flex;align-items:stretch;background:#2C2B2A">
+              <span style="display:flex;align-items:center;background:#F15B47;color:#2C2B2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 800;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:0 9px">22 yd</span>
+              <span style="padding:8px 12px;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 700;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:#fff">Gully No. 4, Andheri East</span>
+            </div>
+          </div>
+        </div>
+        <div style="width:300px;height:533px;flex:0 0 auto;position:relative;background:#F6F8ED;overflow:hidden;display:flex;flex-direction:column;padding:22px;box-sizing:border-box">
+          <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 900;font-size:38px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#2C2B2A">It's 22 yards<br>from <span style="color:#F15B47">here</span></div>
+          <div style="position:relative;flex:1;margin-top:16px;overflow:hidden;background:#DCE0CE">
+            <div style="position:absolute;inset:0;background-image:{{ img.street }};background-size:cover;background-position:52% 44%;filter:grayscale(.35) contrast(1.22) saturate(.85)"></div>
+            <div style="position:absolute;left:0;bottom:0;display:flex;align-items:stretch;background:#2C2B2A">
+              <span style="display:flex;align-items:center;background:#F15B47;color:#2C2B2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 800;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:0 9px">22 yd</span>
+              <span style="padding:8px 12px;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 700;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#fff">Gully No. 4</span>
+            </div>
+          </div>
+          <div style="margin-top:16px;background:#2C2B2A;color:#F6F8ED;align-self:flex-start;padding:12px 18px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase">Swipe up · send your ground</div>
+        </div>
+        <div style="flex:1;min-width:220px;padding:4px 0 0">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Why it travels</div>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#5B6570;text-wrap:pretty">The plate is a stamp you can put on anyone's photograph — which turns every customer with a phone into a contributor and builds a growing archive of real grounds. The only one of the three where imperfect imagery is the point rather than a compromise.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="margin:0;font-size:13.5px;color:#7A838D;max-width:96ch;text-wrap:pretty">Reply with <a href="#3a">3a</a>, <a href="#3b">3b</a> or <a href="#3c">3c</a> and I'll build it into the homepage properly. Earlier turns stay below for reference.</p>
+</section>
+
+<!-- ============================ TURN 2 ============================ -->
+<section style="font-family:Urbanist,Helvetica,sans-serif;color:#2C2B2A;padding:48px 48px 64px;display:flex;flex-direction:column;gap:28px">
+
+  <div style="max-width:1100px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Turn 2 · Homepage Hero · New territory</div>
+    <h1 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 82,'wght' 800;font-size:38px;letter-spacing:-.02em;line-height:1">Three directions that stop pretending to be a sportswear brand</h1>
+    <p style="margin:12px 0 0;font-size:15.5px;line-height:1.6;color:#5B6570;text-wrap:pretty">Nike and Adidas can shout because the brand <em>is</em> the product. 22Yards sells other people's products — so the interesting ground is what a great specialist retailer owns instead: the objects, the expertise, and the customers. None of these three use athlete photography at all.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start">
+
+    <!-- ===================== OPTION 2A — SPECIMEN ===================== -->
+    <div id="2a" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">2A</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Specimen</span>
+        <span style="font-size:13.5px;color:#7A838D">Light and obsessive · the inventory itself as the campaign · zero photography</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#F6F8ED;overflow:hidden;display:flex">
+
+        <div style="flex:0 0 46%;display:flex;flex-direction:column;padding:40px 44px 48px;box-sizing:border-box;border-right:1px solid #DCE0CE">
+          <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto">
+          <div style="flex:1"></div>
+          <div style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8A8F79;margin-bottom:20px">Catalogue No. 01 — Season 26</div>
+          <h2 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 74,'wght' 800;font-size:88px;line-height:.85;letter-spacing:-.04em;text-transform:uppercase;color:#2C2B2A">We know<br>every<br><span style="color:#F15B47">object</span><br>we sell</h2>
+          <p style="margin:26px 0 0;font-size:17.5px;line-height:1.55;color:#5B6152;max-width:38ch">Willow grade, glove weight, shuttle speed, shoe stud pattern. Fourteen sports, stocked genuine, specced from memory.</p>
+          <div style="display:flex;align-items:center;gap:24px;margin-top:34px;flex-wrap:wrap">
+            <a href="#" style="background:#2C2B2A;color:#F6F8ED;padding:19px 38px;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#F15B47;color:#2C2B2A">Browse the range →</a>
+            <a href="#" style="color:#2C2B2A;font-size:13.5px;font-weight:600;border-bottom:1px solid #B5BBA4;padding-bottom:3px" style-hover="color:#F15B47;border-color:#F15B47">Ask someone who plays</a>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px;border-bottom:1px solid #DCE0CE;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8A8F79">
+            <span>Index · in stock now</span>
+            <span>Genuine · brand-supplied</span>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))">
+            <sc-for list="{{ specimens }}" as="s" hint-placeholder-count="12">
+              <div style="border-right:1px solid #DCE0CE;border-bottom:1px solid #DCE0CE;padding:18px 18px 16px;display:flex;flex-direction:column;min-width:0;overflow:hidden" style-hover="background:#EEF1E0">
+                <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 700;font-size:10px;letter-spacing:.16em;color:#B9A23C">{{ s.no }}</span>
+                <span style="margin-top:auto;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 76,'wght' 700;font-size:19px;line-height:1.08;letter-spacing:-.015em;color:#2C2B2A;text-wrap:pretty">{{ s.name }}</span>
+                <span style="margin-top:7px;font-size:11.5px;line-height:1.4;color:#7C8271">{{ s.spec }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== OPTION 2B — I PLAY ===================== -->
+    <div id="2b" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">2B</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">I Play ___</span>
+        <span style="font-size:13.5px;color:#7A838D">A hero that does something instead of saying something · try the sport buttons</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#fff;overflow:hidden;display:flex;flex-direction:column">
+        <div style="position:absolute;top:0;right:0;width:46%;height:100%;background:#EFF2F6"></div>
+
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:36px 48px 0">
+          <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto">
+          <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A939D">Fourteen sports · one kit bag</span>
+        </div>
+
+        <div style="position:relative;flex:1;display:flex;align-items:stretch;min-height:0">
+          <div style="flex:0 0 54%;display:flex;flex-direction:column;justify-content:center;padding:0 48px;box-sizing:border-box;min-width:0">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 76,'wght' 600;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8A939D;margin-bottom:22px">Start where you play</span>
+            <h2 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 72,'wght' 800;font-size:118px;line-height:.84;letter-spacing:-.045em;text-transform:uppercase;color:#2C2B2A">I play<br><span style="color:#F15B47;border-bottom:8px solid #F5BE2A;padding-bottom:2px">{{ pick.sport }}</span></h2>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:38px;max-width:620px">
+              <sc-for list="{{ sportBtns }}" as="b" hint-placeholder-count="14">
+                <button type="button" onClick="{{ b.select }}" style="appearance:none;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.06em;padding:10px 15px;border:1.5px solid {{ b.border }};background:{{ b.bg }};color:{{ b.fg }};transition:all .16s ease">{{ b.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 48px;box-sizing:border-box;min-width:0">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#7A838D;margin-bottom:18px">Where most {{ pick.sport }} players start</span>
+            <div style="display:flex;flex-direction:column;border-top:1px solid #D5DCE5">
+              <sc-for list="{{ pick.routes }}" as="r" hint-placeholder-count="3">
+                <a href="#" style="display:flex;align-items:baseline;gap:16px;padding:20px 4px;border-bottom:1px solid #D5DCE5;min-width:0" style-hover="background:#E4E9EF">
+                  <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 700;font-size:11px;letter-spacing:.14em;color:#A5AEB7;flex:0 0 auto">{{ r.no }}</span>
+                  <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 76,'wght' 700;font-size:25px;letter-spacing:-.02em;color:#2C2B2A;min-width:0">{{ r.label }}</span>
+                  <span style="margin-left:auto;font-size:13px;color:#6B7683;flex:0 0 auto">{{ r.note }}</span>
+                </a>
+              </sc-for>
+            </div>
+            <a href="#" style="margin-top:32px;align-self:flex-start;background:#2C2B2A;color:#fff;padding:19px 36px;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#F15B47;color:#2C2B2A">Show me everything →</a>
+          </div>
+        </div>
+
+        <div style="position:relative;display:flex;align-items:center;gap:32px;padding:0 48px 34px;font-size:12.5px;color:#7A838D;flex-wrap:wrap">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;background:#019067"></span>100% genuine products</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;background:#F5BE2A"></span>Free shipping above ₹999</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;background:#F15B47"></span>7-day easy returns</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== OPTION 2C — SAID BY PLAYERS ===================== -->
+    <div id="2c" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+        <span style="background:#2C2B2A;color:#F5BE2A;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">2C</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Said By Players</span>
+        <span style="font-size:13.5px;color:#7A838D">Anti-marketing · your real reviews at campaign scale · counter-positions the big brands</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#2C2B2A;overflow:hidden;display:flex;flex-direction:column;padding:40px 56px 44px;box-sizing:border-box">
+        <div style="position:absolute;top:-80px;right:-30px;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 62,'wght' 900;font-size:440px;line-height:1;color:rgba(239,242,246,.045);pointer-events:none">”</div>
+
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px">
+          <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto;filter:brightness(0) invert(1)">
+          <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(239,242,246,.72)">Unedited · verified purchase</span>
+        </div>
+
+        <div style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1020px">
+          <blockquote style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 74,'wght' 700;font-size:{{ voice.size }};line-height:1.02;letter-spacing:-.035em;color:#fff;text-wrap:pretty">{{ voice.text }}</blockquote>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:40px">
+            <span style="width:46px;height:46px;flex:0 0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 84,'wght' 800;font-size:15px;background:{{ voice.avBg }};color:#2C2B2A">{{ voice.initials }}</span>
+            <span>
+              <span style="display:block;font-size:16px;font-weight:700;color:#fff">{{ voice.name }}</span>
+              <span style="display:block;font-size:13.5px;color:#9AA3AC;margin-top:2px">{{ voice.meta }}</span>
+            </span>
+          </div>
+        </div>
+
+        <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+            <a href="#" style="background:#F5BE2A;color:#2C2B2A;padding:19px 38px;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase" style-hover="background:#fff">See what they bought →</a>
+            <span style="font-size:13px;color:#8A939D">Four continents. One kit bag.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <sc-for list="{{ voiceDots }}" as="d" hint-placeholder-count="4">
+              <button type="button" onClick="{{ d.select }}" aria-label="{{ d.label }}" style="appearance:none;border:0;cursor:pointer;padding:0;width:{{ d.w }};height:3px;background:{{ d.bg }};transition:width .4s ease,background .4s ease"></button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="margin:0;font-size:13.5px;color:#7A838D;max-width:96ch;text-wrap:pretty">Reply with <a href="#2a">2a</a>, <a href="#2b">2b</a> or <a href="#2c">2c</a>. All three are light on production: <a href="#2a">2a</a> and <a href="#2b">2b</a> need no imagery at all, <a href="#2c">2c</a> needs only reviewer headshots. Turn 1 (<a href="#1a">1a</a>, <a href="#1b">1b</a>) is still below for reference.</p>
+</section>
+
+<!-- ============================ TURN 1 ============================ -->
+<section style="font-family:Urbanist,Helvetica,sans-serif;color:#2C2B2A;padding:0 48px 72px;display:flex;flex-direction:column;gap:28px;opacity:.72">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;max-width:2680px;border-top:1px solid #C7CDD4;padding-top:44px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8A939D;margin-bottom:10px">Turn 1 · Superseded</div>
+      <h2 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 82,'wght' 800;font-size:30px;letter-spacing:-.02em;line-height:1">Distance-led campaign directions</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <button type="button" onClick="{{ togglePlay }}" style="appearance:none;border:1.5px solid #2C2B2A;background:#2C2B2A;color:#fff;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:12px 18px">{{ playLabel }}</button>
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+        <button type="button" onClick="{{ c.select }}" style="appearance:none;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start">
+
+    <div id="1a" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style="background:#6B7683;color:#fff;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">1A</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Every Game Has Its Distance</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#1A1E22;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:{{ frame.imgA }};background-size:cover;background-position:{{ frame.posA }};filter:grayscale(.72) contrast(1.16) brightness(.82);transition:background-image .6s ease,background-position 1.2s ease"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(18,21,24,.96) 0%,rgba(18,21,24,.82) 34%,rgba(18,21,24,.34) 62%,rgba(18,21,24,.55) 100%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(18,21,24,.9) 0%,rgba(18,21,24,0) 42%)"></div>
+
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:40px 56px 52px;box-sizing:border-box">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:24px">
+            <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto;filter:brightness(0) invert(1)">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:12px;letter-spacing:.16em;color:rgba(239,242,246,.6)">{{ frame.counter }}</span>
+          </div>
+          <div style="flex:1"></div>
+          <div style="position:relative;height:96px;margin-bottom:34px">
+            <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(239,242,246,.3)"></div>
+            <div style="position:absolute;left:0;right:0;bottom:1px;height:9px;background-image:repeating-linear-gradient(to right,rgba(239,242,246,.34) 0 1px,transparent 1px 42px)"></div>
+            <div style="position:absolute;bottom:0;left:{{ frame.pct }};transform:translateX(-50%);display:flex;flex-direction:column;align-items:flex-start;transition:left .85s cubic-bezier(.4,0,.15,1)">
+              <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 74,'wght' 600;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#EFF2F6;white-space:nowrap;margin-bottom:6px">{{ frame.sport }}</span>
+              <span style="display:flex;align-items:baseline;gap:8px;white-space:nowrap">
+                <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 72,'wght' 800;font-size:54px;line-height:.82;letter-spacing:-.03em;color:#F5BE2A">{{ frame.value }}</span>
+                <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 78,'wght' 600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#F5BE2A">{{ frame.unit }}</span>
+              </span>
+              <span style="width:1px;height:14px;background:#F5BE2A;margin-top:4px"></span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:56px;flex-wrap:wrap">
+            <div style="max-width:780px">
+              <h3 style="margin:0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 76,'wght' 800;font-size:104px;line-height:.86;letter-spacing:-.035em;text-transform:uppercase;color:#fff">Every game<br>has its <span style="color:#F15B47">distance</span></h3>
+              <p style="margin:24px 0 0;font-size:18px;line-height:1.5;color:#C8CFCA;max-width:46ch">We started at twenty-two. We stock them all — genuine gear for fourteen sports, sized to the player.</p>
+            </div>
+            <a href="#" style="background:#F15B47;color:#2C2B2A;padding:20px 40px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">Shop your sport →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="1b" style="width:1280px;flex:0 0 auto;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style="background:#6B7683;color:#fff;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 88,'wght' 800;font-size:13px;letter-spacing:.1em;padding:6px 11px">1B</span>
+        <span style="font-size:17px;font-weight:700;letter-spacing:-.01em">Close The Distance</span>
+      </div>
+
+      <div style="position:relative;height:760px;background:#14171A;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:{{ frame.imgB }};background-size:cover;background-position:{{ frame.posB }};filter:saturate(.42) contrast(1.3) brightness(.62);transition:background-image .6s ease"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(120% 78% at 50% 34%,rgba(20,23,26,.1) 0%,rgba(20,23,26,.72) 58%,rgba(20,23,26,.96) 100%)"></div>
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;padding:40px 56px 48px;box-sizing:border-box;text-align:center">
+          <div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px">
+            <img src="assets/22yards-logo.png" alt="22 Yards" style="display:block;height:34px;width:auto;filter:brightness(0) invert(1)">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 80,'wght' 600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(239,242,246,.55)">A 22 Yards Campaign</span>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <span style="font-family:Archivo,sans-serif;font-variation-settings:'wdth' 74,'wght' 600;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#F5BE2A">{{ frame.sport }}</span>
+            <span style="width:1px;height:46px;background:linear-gradient(to bottom,#F5BE2A,rgba(245,190,42,0));margin:16px 0 0"></span>
+            <h3 style="margin:22px 0 0;font-family:Archivo,sans-serif;font-variation-settings:'wdth' 68,'wght' 800;font-size:150px;line-height:.82;letter-spacing:-.045em;text-transform:uppercase;color:#fff">Close the<br>distance</h3>
+            <p style="margin:26px 0 0;font-size:18px;line-height:1.5;color:#C8CFCA;max-width:40ch">Between where you play now and where you mean to.</p>
+            <a href="#" style="margin-top:34px;background:#fff;color:#2C2B2A;padding:20px 44px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase">Find your gear →</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5">
+              <button type="button" onClick="{{ d.select }}" aria-label="{{ d.label }}" style="appearance:none;border:0;cursor:pointer;padding:0;width:{{ d.w }};height:3px;background:{{ d.bg }};transition:width .4s ease,background .4s ease"></button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+
+  /* ---------- 2A · Specimen: real stocked lines and category routes ---------- */
+  SPECIMENS = [
+    { name: 'SS Master', spec: 'Kashmir willow · short handle · Rs. 2,900' },
+    { name: 'SS Ton Ultra Lite', spec: 'Batting gloves · adult · Rs. 2,100' },
+    { name: 'SS Gutsy', spec: 'Cricket helmet · steel grille · Rs. 1,460' },
+    { name: 'SS Dre Russ NP', spec: 'Kashmir willow · SH · Rs. 3,000' },
+    { name: 'SS Ton Classic', spec: 'Batting gloves · entry · Rs. 880' },
+    { name: 'SS Hanging Ball', spec: 'Training aid · solo practice · Rs. 470' },
+    { name: 'Badminton Rackets', spec: 'Strung & unstrung · grip options' },
+    { name: 'Shuttlecocks', spec: 'Feather & nylon · speed graded' },
+    { name: 'Football Shoes', spec: 'Firm ground · turf · indoor' },
+    { name: 'Swimming Goggles', spec: 'Anti-fog · junior & senior fit' },
+    { name: 'Yoga Mats', spec: 'Cushioned · non-slip · 4–8 mm' },
+    { name: 'Carrom Boards', spec: 'Tournament & club grade' }
+  ];
+
+  /* ---------- 2B · I Play: the three routes most players take in ---------- */
+  SPORT_ROUTES = {
+    'Cricket':   [['Bats', 'English & Kashmir willow'], ['Protection', 'Helmets, pads, guards'], ['Kit bags', 'Solo to full squad']],
+    'Football':  [['Shoes', 'Firm ground to indoor'], ['Balls', 'Match & training'], ['Shin pads', 'Junior to senior']],
+    'Badminton': [['Rackets', 'Strung & unstrung'], ['Shuttlecocks', 'Feather & nylon'], ['Shoes', 'Non-marking court']],
+    'Tennis':    [['Rackets', 'Head size & grip'], ['Balls', 'Practice & match'], ['Accessories', 'Grips, dampeners']],
+    'Basketball':[['Balls', 'Indoor & outdoor'], ['Accessories', 'Pumps, nets, bags'], ['Footwear', 'Court grip']],
+    'Swimming':  [['Goggles', 'Anti-fog, junior fit'], ['Caps & costumes', 'Silicone & fabric'], ['Kickboards', 'Training aids']],
+    'Volleyball':[['Balls', 'Indoor & beach'], ['Nets', 'Club & tournament'], ['Knee pads', 'Impact protection']],
+    'Table Tennis':[['Bats', 'Beginner to pro'], ['Balls', '1-star to 3-star'], ['Accessories', 'Nets & cases']],
+    'Hockey':    [['Sticks', 'Wood & composite'], ['Balls', 'Match & practice'], ['Protection', 'Shin & glove']],
+    'Pickleball':[['Paddles', 'Graphite & composite'], ['Balls', 'Indoor & outdoor'], ['Starter sets', 'Two-player kits']],
+    'Skating':   [['Roller skates', 'Adjustable junior sizes'], ['Protective gear', 'Knee, elbow, wrist'], ['Helmets', 'Certified fit']],
+    'Running':   [['Shoes', 'Road & trail'], ['Apparel', 'Tees, shorts, layers'], ['Accessories', 'Bands & bottles']],
+    'Yoga & Fitness':[['Mats', 'Cushioned, non-slip'], ['Weights', 'Dumbbells & kettlebells'], ['Bands & grips', 'Resistance training']],
+    'Chess & Carrom':[['Boards', 'Club & tournament grade'], ['Pieces', 'Weighted sets'], ['Accessories', 'Strikers & powder']]
+  };
+
+  /* ---------- 2C · Said By Players: verbatim verified reviews ---------- */
+  VOICES = [
+    { name: 'Ankit Khera', meta: 'Cricket coach & top-order batsman · Dallas, TX',
+      text: 'It is original, durable, and their after-sales support is amazing.' },
+    { name: 'Venkateswara Bijjem', meta: 'All-rounder · Orlando, FL',
+      text: 'One of the best cricket gear stores for reliability, competitive pricing and fast service.' },
+    { name: 'Murray Tyson', meta: 'Player & coach · Grahamstown, South Africa',
+      text: 'Great price and a great quality product.' },
+    { name: 'Saharsh Shwethan', meta: 'USA Under-19 · Morrisville, NC',
+      text: 'One of the best cricket gear shops I have known.' }
+  ];
+
+  /* ---------- Turn 1 (kept for reference) ---------- */
+  FRAMES = [
+    { sport: 'Cricket', value: '22', unit: 'yards', m: 20.12, fileA: 'Harry Ormandy Batting.jpg', posA: '72% 22%', fileB: 'Cricket at MELZ Stadium 02.jpg', posB: '50% 32%' },
+    { sport: 'Football', value: '12', unit: 'yards', m: 10.97, fileA: 'Football training.jpg', posA: '64% 30%', fileB: 'Football iu 1996.jpg', posB: '50% 38%' },
+    { sport: 'Badminton', value: '13.4', unit: 'metres', m: 13.4, fileA: 'Badminton player.jpg', posA: '62% 30%', fileB: 'Badminton player.jpg', posB: '50% 30%' },
+    { sport: 'Tennis', value: '23.77', unit: 'metres', m: 23.77, fileA: 'Tennis Racket and Balls.jpg', posA: '58% 48%', fileB: 'Tennis Racket and Balls.jpg', posB: '50% 50%' },
+    { sport: 'Swimming', value: '25', unit: 'metres', m: 25, fileA: 'Swimming pool.jpg', posA: '58% 48%', fileB: 'Swimming pool.jpg', posB: '50% 52%' }
+  ];
+
+  COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
+  pic(file, width) { return 'url(' + this.COMMONS + encodeURIComponent(file) + '?width=' + Math.round((width || 1300) * 1.6) + ')'; }
+
+  state = { i: 0, playing: true, sport: 'Cricket', voice: 0 };
+
+  componentDidMount() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { this.setState({ playing: false }); return; }
+    this.timer = setInterval(() => {
+      if (!this.state.playing) return;
+      this.setState(s => ({ i: (s.i + 1) % this.FRAMES.length }));
+    }, 4200);
+    this.vtimer = setInterval(() => {
+      this.setState(s => ({ voice: (s.voice + 1) % this.VOICES.length }));
+    }, 5200);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.vtimer); }
+
+  renderVals() {
+    const S = this.state, F = this.FRAMES, n = F.length;
+    const f = F[S.i];
+    const pct = 8 + Math.min(1, f.m / 26) * 84;
+
+    const sports = Object.keys(this.SPORT_ROUTES);
+    const active = this.SPORT_ROUTES[S.sport] ? S.sport : 'Cricket';
+    const v = this.VOICES[S.voice];
+    /* Short quotes get to be enormous; the long one steps down so it still fits. */
+    const vsize = v.text.length > 88 ? '62px' : (v.text.length > 60 ? '76px' : '96px');
+
+    return {
+      /* 3A–3C · imagery is deliberately generic; each composition contains or
+         grades it hard so weak source material still reads as art direction. */
+      img: {
+        roar: this.pic('Cricket at MELZ Stadium 02.jpg', 1400),
+        pro: this.pic('Harry Ormandy Batting.jpg', 800),
+        next: this.pic('Cricket picture.jpg', 800),
+        street: this.pic('Children playing football.jpg', 1400)
+      },
+      checklist: [
+        { label: 'Bat knocked in', note: 'by us', dot: '#F5BE2A', fg: '#ffffff' },
+        { label: 'Grip re-taped', note: 'fresh', dot: '#F5BE2A', fg: '#ffffff' },
+        { label: 'Pads sized', note: 'youth', dot: '#F5BE2A', fg: '#ffffff' },
+        { label: 'Bag packed', note: 'last night', dot: 'rgba(239,242,246,.45)', fg: 'rgba(239,242,246,.72)' }
+      ],
+
+      /* 2A */
+      specimens: this.SPECIMENS.map((s, i) => Object.assign({}, s, { no: String(i + 1).padStart(3, '0') })),
+
+      /* 2B */
+      pick: {
+        sport: active,
+        routes: this.SPORT_ROUTES[active].map((r, i) => ({ no: String(i + 1).padStart(2, '0'), label: r[0], note: r[1] }))
+      },
+      sportBtns: sports.map(s => ({
+        label: s,
+        bg: active === s ? '#2C2B2A' : 'transparent',
+        border: active === s ? '#2C2B2A' : '#CDD4DC',
+        fg: active === s ? '#ffffff' : '#5B6570',
+        select: () => this.setState({ sport: s })
+      })),
+
+      /* 2C */
+      voice: Object.assign({}, v, {
+        size: vsize,
+        initials: v.name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase(),
+        avBg: ['#F5BE2A', '#F15B47', '#70BC9C', '#C8CFCA'][S.voice % 4]
+      }),
+      voiceDots: this.VOICES.map((x, i) => ({
+        label: x.name,
+        w: S.voice === i ? '34px' : '14px',
+        bg: S.voice === i ? '#F5BE2A' : 'rgba(239,242,246,.34)',
+        select: () => this.setState({ voice: i })
+      })),
+
+      /* Turn 1 */
+      frame: {
+        sport: f.sport, value: f.value, unit: f.unit,
+        imgA: this.pic(f.fileA), posA: f.posA,
+        imgB: this.pic(f.fileB), posB: f.posB,
+        pct: pct.toFixed(1) + '%',
+        counter: String(S.i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0')
+      },
+      playLabel: S.playing ? '❚❚ Pause' : '▶ Play',
+      togglePlay: () => this.setState(s => ({ playing: !s.playing })),
+      chips: F.map((x, i) => ({
+        label: x.sport,
+        bg: S.i === i ? '#EFF2F6' : 'transparent',
+        border: S.i === i ? '#2C2B2A' : '#C2C9D1',
+        fg: S.i === i ? '#2C2B2A' : '#6B7683',
+        select: () => this.setState({ i: i, playing: false })
+      })),
+      dots: F.map((x, i) => ({
+        label: x.sport,
+        w: S.i === i ? '38px' : '16px',
+        bg: S.i === i ? '#F5BE2A' : 'rgba(239,242,246,.38)',
+        select: () => this.setState({ i: i, playing: false })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
